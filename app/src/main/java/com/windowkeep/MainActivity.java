@@ -11,6 +11,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toast.makeText(MainActivity.this, "Clone of project successful", Toast.LENGTH_LONG).show();
+
+        System.out.println("Hello everyone");
     }
 }
