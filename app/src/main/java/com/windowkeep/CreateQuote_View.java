@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-public class CreateQuote extends AppCompatActivity {
+public class CreateQuote_View extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

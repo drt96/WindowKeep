@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createQuote() {
-        Intent intent = new Intent(this, CreateQuote.class);
+        Intent intent = new Intent(this, CreateQuote_View.class);
         startActivity(intent);
     }
 }
