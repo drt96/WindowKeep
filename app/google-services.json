@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "527928053529",
+    "firebase_url": "https://windowkeep.firebaseio.com",
+    "project_id": "windowkeep",
+    "storage_bucket": "windowkeep.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527928053529:android:820d6cb46d782311407f88",
+        "android_client_info": {
+          "package_name": "com.windowkeep"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527928053529-plkkgjlcbjg27f83odd6o11pv7htq9kc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.windowkeep",
+            "certificate_hash": "52a65e290f15a9f902a333a630733dcd9b43de0d"
+          }
+        },
+        {
+          "client_id": "527928053529-3svlqoosc59b6j0jtiibg245fus26gaq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQ7242h4SFweGZkFUgA6VAlxKoAuWsn-g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527928053529-3svlqoosc59b6j0jtiibg245fus26gaq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
