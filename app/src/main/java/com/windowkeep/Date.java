@@ -1,5 +1,8 @@
 package com.windowkeep;
 
+/*
+    Handles the logic to make and use Dates and Times
+ */
 public class Date {
     private int day;
     private int month;
