@@ -1,23 +1,40 @@
 package com.windowkeep;
+
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Locale;
 
-// Time zone America/Boise
 /*
     Handles the logic to make and use Dates and Times
  */
 public class Date {
+    /* Default zone */
+    public static final String ZONE = "America/Boise";
+
+    /* Private data for Date.class */
     private String day;
     private String month;
     private String year;
     private String time;
+    private ZonedDateTime zdt;
+    private ZoneId zoneId;
+    private DateTimeFormatter formatter;
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime( FormatStyle.MEDIUM );
-    String output = zdt.format( formatter.withLocale( Locale.US ) );  // Or Locale.CANADA_FRENCH and so on.
+    public Date() {
+        /* In case you want to change the zone */
+        zoneId = ZoneId.of(ZONE);
+        zdt = ZonedDateTime.now(zoneId);
+        /* Format to the time zone */
+        formatter = DateTimeFormatter.ofPattern( "dd/MM/yyyy hh:mm a" );
+
+    }
 
     public String getDay() {
+        /* Locale is for language */
+        zdt.format(formatter.withLocale( Locale.US ) );  // Or Locale.CANADA_FRENCH and so on.
+
         return day;
     }
 
