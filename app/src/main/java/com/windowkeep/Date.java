@@ -30,7 +30,7 @@ public class Date {
         /* Locale is for language */
         zdt.format(formatter.withLocale( Locale.US ) );  // Or Locale.CANADA_FRENCH and so on.
         /* Format to the time zone */
-        formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a");
+        formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a");
 
     }
 
@@ -65,5 +65,14 @@ public class Date {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        return "Date is: " +
+                ", Month: " + month +
+                "Day: " + day +
+                ", Year: " + year +
+                ", Time: " + time;
     }
 }
