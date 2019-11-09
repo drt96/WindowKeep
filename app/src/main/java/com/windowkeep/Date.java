@@ -22,6 +22,7 @@ public class Date {
     private ZoneId zoneId;
     private DateTimeFormatter formatter;
 
+    /* Default Constructor */
     public Date() {
         /* In case you want to change the zone */
         zoneId = ZoneId.of(ZONE);
