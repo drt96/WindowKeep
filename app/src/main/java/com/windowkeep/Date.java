@@ -3,7 +3,6 @@ package com.windowkeep;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.Locale;
 
 /*
@@ -11,13 +10,14 @@ import java.util.Locale;
  */
 public class Date {
     /* Default zone */
-    public static final String ZONE = "America/Boise";
+    private static final String ZONE = "America/Boise";
 
     /* Private data for Date.class */
-    private String day;
-    private String month;
-    private String year;
+    private int day;
+    private int month;
+    private int year;
     private String time;
+
     private ZonedDateTime zdt;
     private ZoneId zoneId;
     private DateTimeFormatter formatter;
@@ -26,40 +26,40 @@ public class Date {
         /* In case you want to change the zone */
         zoneId = ZoneId.of(ZONE);
         zdt = ZonedDateTime.now(zoneId);
-        /* Format to the time zone */
-        formatter = DateTimeFormatter.ofPattern( "dd/MM/yyyy hh:mm a" );
-
-    }
-
-    public String getDay() {
         /* Locale is for language */
         zdt.format(formatter.withLocale( Locale.US ) );  // Or Locale.CANADA_FRENCH and so on.
+        /* Format to the time zone */
+        formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a");
 
-        return day;
     }
 
-    public void setDay(String day) {
+    /* Getters and Setters */
+    public int getDay() {
+        return zdt.getDayOfMonth();
+    }
+
+    public void setDay(int day) {
         this.day = day;
     }
 
-    public String getMonth() {
-        return month;
+    public int getMonth() {
+        return zdt.getMonthValue();
     }
 
-    public void setMonth(String month) {
+    public void setMonth(int month) {
         this.month = month;
     }
 
-    public String getYear() {
-        return year;
+    public int getYear() {
+        return zdt.getYear();
     }
 
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
     public String getTime() {
-        return time;
+        return  zdt.getHour() + " " + zdt.getMinute();
     }
 
     public void setTime(String time) {
