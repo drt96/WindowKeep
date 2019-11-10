@@ -69,10 +69,10 @@ public class Date {
 
     @Override
     public String toString() {
-        return "Date is: " +
-                ", Month: " + month +
-                "Day: " + day +
-                ", Year: " + year +
-                ", Time: " + time;
+        return "Date\n" +
+                "Month: " + month +
+                " Day: " + day +
+                " Year: " + year +
+                " and Time: " + time;
     }
 }

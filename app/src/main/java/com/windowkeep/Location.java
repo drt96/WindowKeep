@@ -37,8 +37,6 @@ public class Location {
 
     @Override
     public String toString() {
-        return "Location: " +
-                "Latitude: " + Latitude +
-                ", Longitude: " + Longitude;
+        return String.format("Lat: %.3f", Latitude) + String.format(", Long: %.3f", Longitude);
     }
 }
