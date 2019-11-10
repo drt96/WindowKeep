@@ -1,7 +1,8 @@
 package com.windowkeep;
 
-import java.util.Date;
-
 public class Quote {
-
+    private Date qouteDate;
+    private Customer customer;
+    private Dollar dollar;
+    private WindowDetails windowDetails;
 }
