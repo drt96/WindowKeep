@@ -16,13 +16,17 @@ public class Customer {
 
      TODO Should we have gmail/ e-mail addresses
       in addition to or instead of phone numbers so that we can better handle calender sync?
-      DOES JAVA HAVE AN (OBJECT NAME = 0 or = NULL) for constructors?
     */
-    public Customer(Location location, String name) {
+    public Customer(Location location) {
+        this.location = location;
+    }
+    // Default Constructor for appointment
+    public Customer(Location location, String name, String email) {
         this.location = location;
         this.name = name;
+        this.email = email;
     }
-
+    // Constructor with all information
     public Customer(Location location, String name, String phoneNumber, String email) {
         this.location = location;
         this.name = name;
@@ -56,7 +60,7 @@ public class Customer {
     }
 
     public String getEmail() {
-        return phoneNumber;
+        return email;
     }
 
     public void setEmail(String email) {
