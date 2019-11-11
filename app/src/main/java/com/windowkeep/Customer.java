@@ -8,6 +8,7 @@ public class Customer {
     private String name;
     private String phoneNumber;
     private Description description;
+    private String email;
 
     /*
      Constructors:
@@ -21,10 +22,11 @@ public class Customer {
         this.name = name;
     }
 
-    public Customer(Location location, String name, String phoneNumber) {
+    public Customer(Location location, String name, String phoneNumber, String email) {
         this.location = location;
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.email = email;
     }
 
     /* Getters and Setters */
@@ -52,6 +54,14 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getEmail() {
+        return phoneNumber;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     // TODO: Figure out enum getters and setters. Is this the right way?
     public Description getDescription() {
         return description;
@@ -67,6 +77,7 @@ public class Customer {
                 "\nLocation: " + location +
                 "\nName: " + name +
                 "\nPhoneNumber: " + phoneNumber +
+                "\nEmail: " + email +
                 "\nDescription: " + description;
     }
 }
