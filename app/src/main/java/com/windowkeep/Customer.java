@@ -56,14 +56,14 @@ public class Customer {
     }
 
     public String getEmail() {
-        return phoneNumber;
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    // TODO: Figure out enum getters and setters. Is this the right way?
+    // TODO: Figure out enum getters and setters. Is this the right way? I think it is. (Daniel)
     public Description getDescription() {
         return description;
     }
