@@ -67,7 +67,7 @@ public class Customer {
         this.email = email;
     }
 
-    // TODO: Figure out enum getters and setters. Is this the right way?
+    // TODO: Figure out enum getters and setters. Is this the right way? I think it is. (Daniel)
     public Description getDescription() {
         return description;
     }
