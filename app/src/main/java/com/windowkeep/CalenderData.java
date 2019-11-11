@@ -7,4 +7,14 @@ import java.util.List;
  */
 public class CalenderData {
    private List <Appointment> appointments;
+
+   public CalenderData(List<Appointment> appointments) {
+      this.appointments = appointments;
+   }
+
+   @Override
+   public String toString() {
+      return "Calender Data" +
+              " Appointments: " + appointments.toString();
+   }
 }

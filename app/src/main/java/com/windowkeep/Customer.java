@@ -12,10 +12,7 @@ public class Customer {
 
     /*
      Constructors:
-     Not every customer will have a phone number
-
-     TODO Should we have gmail/ e-mail addresses
-      in addition to or instead of phone numbers so that we can better handle calender sync?
+     Not every customer will have a phone number but if an apt is made an email is needed
     */
     public Customer(Location location) {
         this.location = location;
