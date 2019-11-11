@@ -15,12 +15,6 @@ public class Dollar {
         this.cents = cents;
     }
 
-    @Override
-    public String toString() {
-        return "$ " + wholeNumber +
-                "." + cents;
-    }
-
     public long getWholeNumber() {
         return wholeNumber;
     }
@@ -35,5 +29,11 @@ public class Dollar {
 
     public void setCents(int cents) {
         this.cents = cents;
+    }
+
+    @Override
+    public String toString() {
+        return "$ " + wholeNumber +
+                "." + cents;
     }
 }
