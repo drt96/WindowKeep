@@ -3,4 +3,41 @@ package com.windowkeep;
 public class Appointment {
     private Date appointmentDate;
     private Quote quote;
+
+    /*
+     Only Constructor that we should need.
+     Noting that Quote has a Customer
+     and Customer has a Location
+     and Location is the unique ID thought-out the app.
+     So that we can have multiple appointments with each customer.
+     (SEE toString if that doesn't make sense)
+    */
+    public Appointment(Date appointmentDate, Quote quote) {
+        this.appointmentDate = appointmentDate;
+        this.quote = quote;
+    }
+
+    /* Getters and setters */
+    public Date getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    public void setAppointmentDate(Date appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
+
+    public Quote getQuote() {
+        return quote;
+    }
+
+    public void setQuote(Quote quote) {
+        this.quote = quote;
+    }
+
+    @Override
+    public String toString() {
+        return "Appointment: " + appointmentDate
+                + "\n" + quote
+                + "\n" + quote.getCustomer().getLocation().toString();
+    }
 }

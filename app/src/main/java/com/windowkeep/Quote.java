@@ -53,7 +53,8 @@ public class Quote {
     @Override
     public String toString() {
         return "Quote:" +
-                "\nQoute: " + qouteDate +
+                /* Date, customer, Dollar and WindowDetails has their own toString */
+                "\nQoute " + qouteDate +
                 "\n" + customer +
                 "\n" + dollar +
                 "\nWindow Details: " + windowDetails;
