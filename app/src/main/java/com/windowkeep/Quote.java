@@ -1,7 +1,6 @@
 package com.windowkeep;
 /*
  A class that handles the making of a Qoute independant of the making of an appointment
- TODO SEE windowDetails.class and Customer.class for queries
 */
 public class Quote {
     private Date qouteDate;

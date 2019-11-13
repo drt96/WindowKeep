@@ -1,5 +1,6 @@
 package com.windowkeep;
 
+/* One instance of the floor class, used to populate the data for a floor */
 public class Floors {
     private int small;
     private int medium;
@@ -12,6 +13,7 @@ public class Floors {
         this.large = large;
     }
 
+    /* Getters and Setters */
     public int getSmall() {
         return small;
     }
@@ -34,5 +36,13 @@ public class Floors {
 
     public void setLarge(int large) {
         this.large = large;
+    }
+
+    @Override
+    public String toString() {
+        return "Floor" +
+                "\n# small: " + small +
+                "\n# medium: " + medium +
+                "\n# large: " + large;
     }
 }
