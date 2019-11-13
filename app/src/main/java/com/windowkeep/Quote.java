@@ -1,6 +1,6 @@
 package com.windowkeep;
 /*
- A class that handles the making of a Qoute independant of the making of an appointment
+ A class that handles the making of a Quote independent of the making of an appointment
 */
 public class Quote {
     private Date qouteDate;
