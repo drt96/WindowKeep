@@ -29,36 +29,43 @@ package com.windowkeep;
 
 public class Quote {
     /* Const data */
-    private static final Dollar basePrice = new Dollar(100, 0);
+    private static final double basePrice = 100.0;
 
-    private static final Dollar s0 = new Dollar(2, 50);
-    private static final Dollar m0 = new Dollar(3, 50);
-    private static final Dollar l0 = new Dollar(4, 50);
+    private static final double s0 = 2.50;
+    private static final double m0 = 3.50;
+    private static final double l0 = 4.50;
 
-    private static final Dollar s1 = new Dollar(2, 25);
-    private static final Dollar m1 = new Dollar(3, 25);
-    private static final Dollar l1 = new Dollar(4, 25);
+    private static final double s1 = 2.25;
+    private static final double m1 = 3.25;
+    private static final double l1 = 4.25;
 
-    private static final Dollar s2 = new Dollar(2, 75);
-    private static final Dollar m2 = new Dollar(3, 75);
-    private static final Dollar l2 = new Dollar(4, 75);
+    private static final double s2 = 2.75;
+    private static final double m2 = 3.75;
+    private static final double l2 = 4.75;
 
-    private static final Dollar sC = new Dollar(1, 50);
-    private static final Dollar mC = new Dollar(2, 50);
-    private static final Dollar lC = new Dollar(3, 50);
+    private static final double sC = 1.50;
+    private static final double mC = 2.50;
+    private static final double lC = 3.50;
 
     /* Private Data */
     private Date qouteDate;
     private Customer customer;
-    private Dollar dollar;
     private WindowDetails windowDetails;
+    private double amount;
 
-    /* This is the only constructor that should be needed */
-    public Quote(Date qouteDate, Customer customer, Dollar dollar, WindowDetails windowDetails) {
+
+    /* These should be the only constructors that should be needed */
+    public Quote(Date qouteDate, Customer customer, WindowDetails windowDetails) {
         this.qouteDate = qouteDate;
         this.customer = customer;
-        this.dollar = dollar;
         this.windowDetails = windowDetails;
+    }
+
+    public Quote(Date qouteDate, Customer customer, WindowDetails windowDetails, double amount) {
+        this.qouteDate = qouteDate;
+        this.customer = customer;
+        this.windowDetails = windowDetails;
+        this.amount = amount;
     }
 
     /* Getters and Setters */
@@ -78,12 +85,12 @@ public class Quote {
         this.customer = customer;
     }
 
-    public Dollar getDollar() {
-        return dollar;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setDollar(Dollar dollar) {
-        this.dollar = dollar;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     public WindowDetails getWindowDetails() {
@@ -94,19 +101,35 @@ public class Quote {
         this.windowDetails = windowDetails;
     }
 
+    /* Use window details to calculate the quote double amount
+    * It's ugly but it should work. I was too lazy to solve it in a loop*/
+    public double calculateAmount(boolean isCommerical) {
+        double calcAmount = 0;
+        Floors temp;
+        int i = 3;
 
-    // Use window details to calculate the quote dollar amount
-    public Dollar calculateAmount(boolean isCommerical)
-    {
-        Dollar amount;
-
-
-        if (isCommerical)
-        {
-            amount.add(basePrice).add(windowDetails.getFloors().get(3).getSmall() s0) ;
+        if (isCommerical) {
+            // Locations with more than the second floor are commercial
+            temp = windowDetails.getFloors().get(i);
+            calcAmount += (basePrice +
+                    (sC * temp.getSmall()) +
+                    (mC * temp.getMedium()) +
+                    (lC * temp.getLarge()));
         } else {
-         }
-
+            i--;
+             temp = windowDetails.getFloors().get(i--);
+            calcAmount += (s0 * temp.getSmall()) +
+                    (m0 * temp.getMedium()) +
+                    (l0 * temp.getLarge());
+            temp = windowDetails.getFloors().get(i--);
+            calcAmount += (s1 * temp.getSmall()) +
+                    (m1 * temp.getMedium()) +
+                    (l1 * temp.getLarge());
+            temp = windowDetails.getFloors().get(i);
+            calcAmount += (s2 * temp.getSmall()) +
+                    (m2 * temp.getMedium()) +
+                    (l2 * temp.getLarge());
+        }
         return amount;
     }
 
@@ -114,10 +137,10 @@ public class Quote {
     @Override
     public String toString() {
         return "Quote:" +
-                /* Date, customer, Dollar and WindowDetails has their own toString */
-                "\nQoute " + qouteDate +
+                /* Date, customer and WindowDetails has their own toString */
+                "\nQuote " + qouteDate +
                 "\n" + customer +
-                "\n" + dollar +
-                "\nWindow Details: " + windowDetails;
+                "\nWindow Details: " + windowDetails +
+                "\n$ " + amount;
     }
 }
