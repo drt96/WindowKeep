@@ -2,9 +2,7 @@ package com.windowkeep;
 
 public class Floors {
     private int small;
-
     private int medium;
-
     private int large;
 
     // Use 0 if nothing
