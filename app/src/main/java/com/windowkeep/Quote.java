@@ -103,12 +103,12 @@ public class Quote {
 
     /* Use window details to calculate the quote double amount
     * It's ugly but it should work. I was too lazy to solve it in a loop*/
-    public double calculateAmount(boolean isCommerical) {
+    public double calculateAmount(boolean isCommercial) {
         double calcAmount = 0;
         Floors temp;
         int i = 3;
 
-        if (isCommerical) {
+        if (isCommercial) {
             // Locations with more than the second floor are commercial
             temp = windowDetails.getFloors().get(i);
             calcAmount += (basePrice +
