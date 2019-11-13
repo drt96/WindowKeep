@@ -2,29 +2,7 @@ package com.windowkeep;
 
 import java.util.List;
 
-/*
-     Calculator Algorithm
-
-  Domestic clients (3 floors):
-        Floor 0:
-    Small:    $2.50
-    Medium:   $3.50
-    Large:    $4.50
-        Floor 1:
-    Small:    $2.25
-    Medium:   $3.25
-    Large:    $4.25
-        Floor 2:
-    Small:    $3.75
-    Medium:   $4.75
-    Large:    $5.75
-
-  Commercial clients (4 or more floors)
-    Base price: $100
-    Small:      $1.50
-    Medium:     $2.50
-    Large:      $3.50
-*/
+/* Handles the data for windows on all floors */
 public class WindowDetails {
     private int windows; // Number of
     private List<Floors> floors; /* More than 3 floors makes for a commercial client with a unique pricing system */
