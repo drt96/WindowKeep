@@ -130,7 +130,7 @@ public class Quote {
                     (m2 * temp.getMedium()) +
                     (l2 * temp.getLarge());
         }
-        return amount;
+        return calcAmount;
     }
 
 
