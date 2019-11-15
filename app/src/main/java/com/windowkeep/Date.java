@@ -1,10 +1,5 @@
 package com.windowkeep;
 
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-
 /*
     Handles the logic to make and use Dates and Times
  */
@@ -18,25 +13,25 @@ public class Date {
     private int year;
     private String time;
 
-    private ZonedDateTime zdt;
-    private ZoneId zoneId;
-    private DateTimeFormatter formatter;
-
     /* Default Constructor */
     public Date() {
-        /* In case you want to change the zone */
-        zoneId = ZoneId.of(ZONE);
-        zdt = ZonedDateTime.now(zoneId);
-        /* Locale is for language */
-        zdt.format(formatter.withLocale(Locale.US));  // Or Locale.CANADA_FRENCH and so on.
-        /* Format to the time zone */
-        formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a");
+    }
 
+    /* NonDefault Constructor */
+    public Date(String time) {
+        this.time = time;
+    }
+
+    public Date(int day, int month, int year, String time) {
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.time = time;
     }
 
     /* Getters and Setters */
     public int getDay() {
-        return zdt.getDayOfMonth();
+        return day;
     }
 
     public void setDay(int day) {
@@ -44,7 +39,7 @@ public class Date {
     }
 
     public int getMonth() {
-        return zdt.getMonthValue();
+        return month;
     }
 
     public void setMonth(int month) {
@@ -52,7 +47,7 @@ public class Date {
     }
 
     public int getYear() {
-        return zdt.getYear();
+        return year;
     }
 
     public void setYear(int year) {
@@ -60,7 +55,7 @@ public class Date {
     }
 
     public String getTime() {
-        return zdt.getHour() + " " + zdt.getMinute();
+        return time;
     }
 
     public void setTime(String time) {
