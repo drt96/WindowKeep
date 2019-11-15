@@ -15,6 +15,7 @@ public class Date {
 
     /* Default Constructor */
     public Date() {
+        /* Tanner's birthday */
         this.day = 26;
         this.month = 10;
         this.year = 1996;
