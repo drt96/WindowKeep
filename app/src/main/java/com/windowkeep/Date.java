@@ -64,10 +64,6 @@ public class Date {
 
     @Override
     public String toString() {
-        return "Date\n" +
-                "Month: " + month +
-                " Day: " + day +
-                " Year: " + year +
-                " and Time: " + time;
+        return month + "/" + day + "/" + year + " AT " + time;
     }
 }
