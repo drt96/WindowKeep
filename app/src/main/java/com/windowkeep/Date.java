@@ -15,6 +15,10 @@ public class Date {
 
     /* Default Constructor */
     public Date() {
+        this.day = 26;
+        this.month = 10;
+        this.year = 1996;
+        this.time = "Hammer Time";
     }
 
     /* NonDefault Constructor */
