@@ -7,8 +7,8 @@ public class WindowDetails {
     private List<Floors> floors; /* More than 3 floors makes for a commercial client with a unique pricing system */
 
     /* Constructor
-    * Only gets made once each floor has been worked on
-    * */
+     * Only gets made once each floor has been worked on
+     * */
     public WindowDetails(List<Floors> floors) {
         this.floors = floors;
     }

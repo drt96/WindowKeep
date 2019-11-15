@@ -6,15 +6,15 @@ import java.util.List;
  A class to hold a list of Calender appointments
  */
 public class CalenderData {
-   private List <Appointment> appointments;
+    private List<Appointment> appointments;
 
-   public CalenderData(List<Appointment> appointments) {
-      this.appointments = appointments;
-   }
+    public CalenderData(List<Appointment> appointments) {
+        this.appointments = appointments;
+    }
 
-   @Override
-   public String toString() {
-      return "Calender Data" +
-              " Appointments: " + appointments.toString();
-   }
+    @Override
+    public String toString() {
+        return "Calender Data" +
+                " Appointments: " + appointments.toString();
+    }
 }

@@ -28,7 +28,7 @@ public class Date {
         zoneId = ZoneId.of(ZONE);
         zdt = ZonedDateTime.now(zoneId);
         /* Locale is for language */
-        zdt.format(formatter.withLocale( Locale.US ) );  // Or Locale.CANADA_FRENCH and so on.
+        zdt.format(formatter.withLocale(Locale.US));  // Or Locale.CANADA_FRENCH and so on.
         /* Format to the time zone */
         formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a");
 
@@ -60,7 +60,7 @@ public class Date {
     }
 
     public String getTime() {
-        return  zdt.getHour() + " " + zdt.getMinute();
+        return zdt.getHour() + " " + zdt.getMinute();
     }
 
     public void setTime(String time) {

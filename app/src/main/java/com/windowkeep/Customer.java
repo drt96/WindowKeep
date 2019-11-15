@@ -17,12 +17,14 @@ public class Customer {
     public Customer(Location location) {
         this.location = location;
     }
+
     // Default Constructor for appointment
     public Customer(Location location, String name, String email) {
         this.location = location;
         this.name = name;
         this.email = email;
     }
+
     // Constructor with all information
     public Customer(Location location, String name, String phoneNumber, String email) {
         this.location = location;
