@@ -46,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
         //Create the on click listener and create the create quote activity
         quoteButton = findViewById(R.id.quoteButton);
-        quoteButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                createQuote();
-            }
-        });
+    }
+
+    public void openQuoteView(View view) {
+        Intent intent = new Intent(this, CreateQuote_View.class);
+        startActivity(intent);
     }
 
     private void createQuote() {
