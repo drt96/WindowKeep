@@ -106,7 +106,7 @@ public class Quote {
     public double calculateAmount(boolean isCommercial) {
         double calcAmount = 0;
         Floors temp;
-        int i = 3;
+        int i = 3; /* Commercial Client */
 
         if (isCommercial) {
             // Locations with more than the second floor are commercial
@@ -118,17 +118,17 @@ public class Quote {
         } else {
             i--;
             temp = windowDetails.getFloors().get(i--);
-            calcAmount += (s0 * temp.getSmall()) +
-                    (m0 * temp.getMedium()) +
-                    (l0 * temp.getLarge());
+            calcAmount += (s2 * temp.getSmall()) +
+                    (m2 * temp.getMedium()) +
+                    (l2 * temp.getLarge());
             temp = windowDetails.getFloors().get(i--);
             calcAmount += (s1 * temp.getSmall()) +
                     (m1 * temp.getMedium()) +
                     (l1 * temp.getLarge());
             temp = windowDetails.getFloors().get(i);
-            calcAmount += (s2 * temp.getSmall()) +
-                    (m2 * temp.getMedium()) +
-                    (l2 * temp.getLarge());
+            calcAmount += (s0 * temp.getSmall()) +
+                    (m0 * temp.getMedium()) +
+                    (l0 * temp.getLarge());
         }
         return calcAmount;
     }
