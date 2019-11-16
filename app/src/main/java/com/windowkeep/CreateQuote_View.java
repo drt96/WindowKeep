@@ -3,6 +3,7 @@ package com.windowkeep;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +40,7 @@ public class CreateQuote_View extends AppCompatActivity {
         email = findViewById(R.id.eT_Email);
         phone_number = findViewById(R.id.eT_Phone);
 
+
         database = FirebaseDatabase.getInstance();
         saveQuote.setOnClickListener(new View.OnClickListener() {
 
@@ -49,6 +51,10 @@ public class CreateQuote_View extends AppCompatActivity {
 
             }
         });
+    }
 
+    public void openCalendar(View view) {
+        Intent intent = new Intent(this, SelectDate_View.class);
+        startActivity(intent);
     }
 }
