@@ -8,48 +8,35 @@
 
     <TextView
         android:id="@+id/tV_TotalWindows"
-        android:layout_width="200dp"
-        android:layout_height="25dp"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:text="Number of Large Windows:"
-        app:layout_constraintBottom_toTopOf="@+id/btn_SaveQuote"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tV_NumLWindows"
-        app:layout_constraintVertical_bias="0.439" />
-
-    <EditText
-        android:id="@+id/eT_lWindows2"
-        android:layout_width="75dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="104dp"
-        android:ems="10"
-        android:hint="0"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/btn_SaveQuote"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/tV_TotalWindows"
-        app:layout_constraintTop_toBottomOf="@+id/eT_lWindows" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tV_NumLWindows" />
 
     <Button
         android:id="@+id/btn_SaveQuote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="100dp"
         android:text="Save Quote For Later"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_CreateAppointment" />
+        app:layout_constraintStart_toEndOf="@+id/btn_CreateAppointment"
+        app:layout_constraintTop_toBottomOf="@+id/tV_TotalWindows" />
 
     <TextView
         android:id="@+id/tV_NumLWindows"
         android:layout_width="200dp"
-        android:layout_height="25dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Number of Large Windows:"
@@ -59,7 +46,7 @@
     <EditText
         android:id="@+id/eT_lWindows"
         android:layout_width="75dp"
-        android:layout_height="25dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="104dp"
@@ -73,7 +60,7 @@
     <TextView
         android:id="@+id/tV_NumMWindows"
         android:layout_width="200dp"
-        android:layout_height="25dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Number of Medium Windows:"
@@ -83,7 +70,7 @@
     <EditText
         android:id="@+id/eT_mWindows"
         android:layout_width="75dp"
-        android:layout_height="25dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="104dp"
@@ -97,7 +84,7 @@
     <TextView
         android:id="@+id/tV_NumSWindows"
         android:layout_width="200dp"
-        android:layout_height="25dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="Number of Small Windows:"
@@ -261,7 +248,7 @@
     <EditText
         android:id="@+id/eT_sWindows"
         android:layout_width="75dp"
-        android:layout_height="25dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="104dp"
@@ -278,12 +265,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginBottom="100dp"
         android:onClick="openCalendar"
         android:text="Create Appointment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_SaveQuote"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tV_TotalWindows" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
