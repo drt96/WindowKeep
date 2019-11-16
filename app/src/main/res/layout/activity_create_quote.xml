@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
-        android:text="Number of Large Windows:"
+        android:text="Number of Total Windows:"
         app:layout_constraintBottom_toTopOf="@+id/btn_SaveQuote"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tV_NumLWindows"
@@ -31,7 +31,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_SaveQuote"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tV_Total number of Windows"
+        app:layout_constraintStart_toEndOf="@id/tV_TotalWindows"
         app:layout_constraintTop_toBottomOf="@+id/eT_lWindows" />
 
     <Button
