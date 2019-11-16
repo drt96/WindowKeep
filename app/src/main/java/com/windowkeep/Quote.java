@@ -55,7 +55,7 @@ public class Quote {
 
 
     /* These should be the only constructors that should be needed */
-    public Quote(Date qouteDate, Customer customer, WindowDetails windowDetails) {
+    public Quote() {
         this.qouteDate = qouteDate;
         this.customer = customer;
         this.windowDetails = windowDetails;

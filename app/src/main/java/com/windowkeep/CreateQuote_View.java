@@ -19,7 +19,7 @@ public class CreateQuote_View extends AppCompatActivity {
     private EditText address;
     private EditText email;
     private EditText phone_number;
-    private DatabaseReference mDatabaseReference;
+    private FirebaseDatabase database;
 
     public CreateQuote_View() {
 
@@ -37,18 +37,16 @@ public class CreateQuote_View extends AppCompatActivity {
         name = findViewById(R.id.eT_Name);
         address = findViewById(R.id.eTM_Address);
         email = findViewById(R.id.eT_Email);
-        phone_number = findViewById(R.id.eT_Number);
+        phone_number = findViewById(R.id.eT_Phone);
 
-
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        database = FirebaseDatabase.getInstance();
         saveQuote.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                Quote quote;
-                quote = new Quote();
-                mDatabaseReference.child("CustomerData").push().setValue(quote);
-                finish();
+                Quote quote = new Quote();
+                database.getReference("Customer info").push().setValue(quote);
+
             }
         });
 
