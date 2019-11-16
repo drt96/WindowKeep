@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
-        android:text="Number of Total Windows:"
+        android:text="Number of Large Windows:"
         app:layout_constraintBottom_toTopOf="@+id/btn_SaveQuote"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tV_NumLWindows"
@@ -107,7 +107,7 @@
     <TextView
         android:id="@+id/tV_Phone"
         android:layout_width="150dp"
-        android:layout_height="25dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Phone Number:"
@@ -117,7 +117,7 @@
     <TextView
         android:id="@+id/tV_Email"
         android:layout_width="150dp"
-        android:layout_height="25dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Email:"
@@ -127,7 +127,7 @@
     <TextView
         android:id="@+id/tV_Address"
         android:layout_width="150dp"
-        android:layout_height="25dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Address"
@@ -163,7 +163,7 @@
     <TextView
         android:id="@+id/tV_Name"
         android:layout_width="150dp"
-        android:layout_height="25dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Customer Name:"
@@ -173,7 +173,7 @@
     <EditText
         android:id="@+id/eT_Name"
         android:layout_width="200dp"
-        android:layout_height="25dp"
+        android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -194,7 +194,7 @@
     <EditText
         android:id="@+id/eTM_Address"
         android:layout_width="200dp"
-        android:layout_height="25dp"
+        android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
@@ -209,7 +209,7 @@
     <TextView
         android:id="@+id/tV_NumFloors"
         android:layout_width="150dp"
-        android:layout_height="25dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="Number of floors:"
@@ -219,7 +219,7 @@
     <EditText
         android:id="@+id/eT_Email"
         android:layout_width="200dp"
-        android:layout_height="25dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
@@ -233,7 +233,7 @@
     <EditText
         android:id="@+id/eT_Phone"
         android:layout_width="200dp"
-        android:layout_height="25dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
@@ -248,11 +248,10 @@
     <Spinner
         android:id="@+id/s_floors"
         android:layout_width="100dp"
-        android:layout_height="25dp"
+        android:layout_height="40dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="117dp"
-        android:entries="1, 2, 3, 4"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
