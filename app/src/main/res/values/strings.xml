@@ -1,4 +1,24 @@
 <resources>
     <string name="app_name">WindowKeep</string>
     <string name="location_permission_denied">User denied permission for device location.</string>
+
+    <string-array name="hourStrings">
+        <item>00</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+    </string-array>
+
+    <string-array name="minutesStrings">
+        <item>00</item>
+        <item>30</item>
+    </string-array>
+
 </resources>
