@@ -21,4 +21,11 @@
         <item>30</item>
     </string-array>
 
+    <string-array name="numFloors">
+        <item>Basement</item>
+        <item>1</item>
+        <item>2</item>
+        <item>Commercial</item>
+    </string-array>
+
 </resources>

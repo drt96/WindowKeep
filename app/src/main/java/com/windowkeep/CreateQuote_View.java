@@ -6,14 +6,17 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class CreateQuote_View extends AppCompatActivity {
+public class CreateQuote_View extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Button saveQuote;
     private EditText name;
@@ -51,10 +54,27 @@ public class CreateQuote_View extends AppCompatActivity {
 
             }
         });
+
+        Spinner floorsSpinner = findViewById(R.id.s_floors);
+        ArrayAdapter<CharSequence> floorAdapter = ArrayAdapter.createFromResource(this, R.array.numFloors, android.R.layout.simple_spinner_item);
+        floorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        floorsSpinner.setAdapter(floorAdapter);
+        floorsSpinner.setOnItemSelectedListener(this);
     }
 
     public void openCalendar(View view) {
         Intent intent = new Intent(this, SelectDate_View.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
