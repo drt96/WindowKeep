@@ -45,15 +45,15 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
 
         database = FirebaseDatabase.getInstance();
-        saveQuote.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Quote quote = new Quote();
-                database.getReference("Customer info").push().setValue(quote);
-
-            }
-        });
+//        saveQuote.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+//                Quote quote = new Quote();
+//                database.getReference("Customer info").push().setValue(quote);
+//
+//            }
+//        });
 
         Spinner floorsSpinner = findViewById(R.id.s_floors);
         ArrayAdapter<CharSequence> floorAdapter = ArrayAdapter.createFromResource(this, R.array.numFloors, android.R.layout.simple_spinner_item);

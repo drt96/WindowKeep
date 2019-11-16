@@ -53,10 +53,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void createQuote() {
-        Intent intent = new Intent(this, CreateQuote_View.class);
-        startActivity(intent);
-    }
 
     // Main function that sets the initial long and lat for the map as well as its view type
     private void setupMap() {
