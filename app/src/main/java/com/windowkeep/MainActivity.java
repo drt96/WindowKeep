@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void openQuoteView(View view) {
         Intent intent = new Intent(this, CreateQuote_View.class);
+        CreateQuote_View.resetWindowCount();
         startActivity(intent);
     }
 
