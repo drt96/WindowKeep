@@ -115,14 +115,29 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         large_windows.addTextChangedListener(textWatcher);
     }
 
-    public void openCalendar(View view) {
-        Intent intent = new Intent(this, SelectDate_View.class);
-        startActivity(intent);
-    }
 
     @Override // This funciton is an abstract function from the spinner that needs implementation
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        if (parent.getSelectedItem() == "Basement") {
+            small_windows.setText(bS);
+            medium_windows.setText(bM);
+            large_windows.setText(bL);
+        }
+        else if (parent.getSelectedItem() == "1") {
+            small_windows.setText(oneS);
+            medium_windows.setText(oneM);
+            large_windows.setText(oneL);
+        }
+        else if (parent.getSelectedItem() == "2") {
+            small_windows.setText(twoS);
+            medium_windows.setText(twoM);
+            large_windows.setText(twoL);
+        }
+        else if (parent.getSelectedItem() == "Commercial") {
+            small_windows.setText(comS);
+            medium_windows.setText(comM);
+            large_windows.setText(comL);
+        }
     }
 
 
@@ -130,6 +145,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     public void onNothingSelected(AdapterView<?> parent) {
         //Intentionally left blank - an abstract function of the spinner
     }
+
 
     public static void resetWindowCount() {
         bS = 0;
@@ -144,5 +160,11 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         comS = 0;
         comM = 0;
         comL = 0;
+    }
+
+
+    public void openCalendar(View view) {
+        Intent intent = new Intent(this, SelectDate_View.class);
+        startActivity(intent);
     }
 }
