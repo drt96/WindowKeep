@@ -32,8 +32,8 @@
 
     <Button
         android:id="@+id/b_confirmDate"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="16dp"
         android:onClick="confirmDate"
         android:text="Confirm Date"
