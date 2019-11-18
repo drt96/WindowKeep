@@ -30,12 +30,13 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
-        android:text="Save Quote For Later"
+        android:text="Save Quote"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_CreateAppointment"
-        app:layout_constraintTop_toBottomOf="@+id/tV_TotalWindows" />
+        app:layout_constraintStart_toEndOf="@+id/btn_CalcPrice"
+        app:layout_constraintTop_toBottomOf="@+id/tV_TotalWindows"
+        app:layout_constraintVertical_bias="0.506" />
 
     <TextView
         android:id="@+id/tV_NumLWindows"
@@ -314,7 +315,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tV_NumFloors" />
 
     <Button
-        android:id="@+id/btn_CreateAppointment"
+        android:id="@+id/btn_SelectDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -323,9 +324,25 @@
         android:onClick="openCalendar"
         android:text="Select Date"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_SaveQuote"
+        app:layout_constraintEnd_toStartOf="@+id/btn_CalcPrice"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tV_TotalWindows" />
+        app:layout_constraintTop_toBottomOf="@+id/tV_TotalWindows"
+        app:layout_constraintVertical_bias="0.506" />
+
+    <Button
+        android:id="@+id/btn_CalcPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:onClick="openCalendar"
+        android:text="Caculate Price"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_SaveQuote"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_SelectDate"
+        app:layout_constraintTop_toBottomOf="@+id/tV_TotalWindows"
+        app:layout_constraintVertical_bias="0.506" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
