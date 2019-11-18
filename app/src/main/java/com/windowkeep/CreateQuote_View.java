@@ -175,7 +175,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // Do nothing
+                // Do nothing!
             }
 
             @Override
