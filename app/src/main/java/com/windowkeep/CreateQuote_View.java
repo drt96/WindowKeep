@@ -217,10 +217,49 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
             }
         };
 
+        View.OnFocusChangeListener smallFocusListener = new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    small_windows.setText("");
+                } else {
+                    //do nothing
+                }
+            }
+        };
+
+        View.OnFocusChangeListener mediumFocusListener = new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    medium_windows.setText("");
+                } else {
+                    //do nothing
+                }
+            }
+        };
+
+        View.OnFocusChangeListener largeFocusListener = new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    large_windows.setText("");
+                } else {
+                    //do nothing
+                }
+            }
+        };
+
         /* Setting up listeners for when the text changes in the number of windows editText fields */
         small_windows.addTextChangedListener(smallTextWatcher);
         medium_windows.addTextChangedListener(mediumTextWatcher);
         large_windows.addTextChangedListener(largeTextWatcher);
+
+        small_windows.setOnFocusChangeListener(smallFocusListener);
+        medium_windows.setOnFocusChangeListener(mediumFocusListener);
+        large_windows.setOnFocusChangeListener(largeFocusListener);
+
+
     }
 
 

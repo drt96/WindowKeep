@@ -141,7 +141,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Address"
+        android:text="Address:"
         android:textAlignment="center"
         android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
