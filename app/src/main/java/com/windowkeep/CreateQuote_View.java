@@ -223,7 +223,9 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
                 if (hasFocus) {
                     small_windows.setText("");
                 } else {
-                    //do nothing
+                    if (small_windows.getText().toString().equalsIgnoreCase("")) {
+                        small_windows.setText("0");
+                    }
                 }
             }
         };
@@ -234,7 +236,9 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
                 if (hasFocus) {
                     medium_windows.setText("");
                 } else {
-                    //do nothing
+                    if (medium_windows.getText().toString().equalsIgnoreCase("")) {
+                        medium_windows.setText("0");
+                    }
                 }
             }
         };
@@ -245,7 +249,9 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
                 if (hasFocus) {
                     large_windows.setText("");
                 } else {
-                    //do nothing
+                    if (large_windows.getText().toString().equalsIgnoreCase("")) {
+                        large_windows.setText("0");
+                    }
                 }
             }
         };
