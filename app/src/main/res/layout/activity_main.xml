@@ -19,11 +19,12 @@
     </com.esri.arcgisruntime.mapping.view.MapView>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/b_Cal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="56dp"
-        android:text="Button"
+        android:onClick="openCalenderView"
+        android:text="Go to Calender"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/quoteButton"
@@ -40,5 +41,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button" />
+        app:layout_constraintStart_toEndOf="@+id/b_Cal" />
 </androidx.constraintlayout.widget.ConstraintLayout>
