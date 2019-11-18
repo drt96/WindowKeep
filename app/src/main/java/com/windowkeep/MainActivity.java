@@ -24,12 +24,14 @@ public class MainActivity extends AppCompatActivity {
 
     // Create variable for button
     private Button quoteButton;
+    private Button b_Calender;
 
     // Constraint Variable for MapView
     private MapView mMapView;
     private LocationDisplay mLocationDisplay;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Create the on click listener and create the create quote activity
         quoteButton = findViewById(R.id.quoteButton);
+        b_Calender = findViewById(R.id.b_Cal);
     }
 
     public void openQuoteView(View view) {
@@ -54,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openCalenderView(View view) {
+        Intent intent = new Intent(this, SelectDate_View.class);
+        startActivity(intent);
+    }
 
     // Main function that sets the initial long and lat for the map as well as its view type
     private void setupMap() {
