@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
+/* View and Presenter for creating a quote */
 public class CreateQuote_View extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Button saveQuote;
@@ -28,7 +28,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     private EditText medium_windows;
     private EditText large_windows;
     private FirebaseDatabase database;
-    // Variables for the small, medium, and large number of windows that change when you select a new spinner option
+    /* Variables for the small, medium, and large number of windows that change when you select a new spinner option */
     private static int bS;
     private static int bM;
     private static int bL;
@@ -58,14 +58,14 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
         database = FirebaseDatabase.getInstance();
 
-        // Setting up the spinner for selecting which floor to input a number of windows on
+        /* Setting up the spinner for selecting which floor to input a number of windows on */
         Spinner floorsSpinner = findViewById(R.id.s_floors);
         ArrayAdapter<CharSequence> floorAdapter = ArrayAdapter.createFromResource(this, R.array.numFloors, android.R.layout.simple_spinner_item);
         floorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         floorsSpinner.setAdapter(floorAdapter);
         floorsSpinner.setOnItemSelectedListener(this);
 
-        // A listener for when number of windows editText changes
+        /* A listener for when number of windows editText changes */
         TextWatcher smallTextWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -217,7 +217,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
             }
         };
 
-        // Setting up listeners for when the text changes in the number of windows editText fields
+        /* Setting up listeners for when the text changes in the number of windows editText fields */
         small_windows.addTextChangedListener(smallTextWatcher);
         medium_windows.addTextChangedListener(mediumTextWatcher);
         large_windows.addTextChangedListener(largeTextWatcher);
@@ -231,7 +231,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     }
 
 
-    @Override // This funciton is an abstract function from the spinner that needs implementation
+    @Override /* This function is an abstract function from the spinner that needs implementation */
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Spinner floorsSpinner = findViewById(R.id.s_floors);
         String currentFloor = floorsSpinner.getSelectedItem().toString();
@@ -259,7 +259,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     }
 
 
-    @Override // This funciton is an abstract function from the spinner that needs implementation
+    @Override /* This function is an abstract function from the spinner that needs implementation */
     public void onNothingSelected(AdapterView<?> parent) {
         //Intentionally left blank - an abstract function of the spinner
     }
