@@ -8,17 +8,37 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.esri.arcgisruntime.data.Feature;
+import com.esri.arcgisruntime.data.FeatureCollection;
+import com.esri.arcgisruntime.data.FeatureCollectionTable;
+import com.esri.arcgisruntime.data.Field;
+import com.esri.arcgisruntime.geometry.GeometryType;
+import com.esri.arcgisruntime.geometry.Point;
+import com.esri.arcgisruntime.geometry.SpatialReferences;
 import com.esri.arcgisruntime.mapping.ArcGISMap;
 import com.esri.arcgisruntime.mapping.Basemap;
+import com.esri.arcgisruntime.mapping.view.Graphic;
+import com.esri.arcgisruntime.mapping.view.GraphicsOverlay;
 import com.esri.arcgisruntime.mapping.view.LocationDisplay;
 import com.esri.arcgisruntime.mapping.view.MapView;
+import com.esri.arcgisruntime.portal.Portal;
+import com.esri.arcgisruntime.portal.PortalItem;
+import com.esri.arcgisruntime.symbology.SimpleLineSymbol;
+import com.esri.arcgisruntime.symbology.SimpleMarkerSymbol;
+import com.esri.arcgisruntime.symbology.SimpleRenderer;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     // Constraint Variable for MapView
     private MapView mMapView;
     private LocationDisplay mLocationDisplay;
+    private GraphicsOverlay mGraphicsOverlay;
 
     @Override
 
@@ -40,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         mMapView = findViewById(R.id.mapView);
         setupMap();
         setupLocationDisplay();
+        createGraphics();
 
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -65,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     // Main function that sets the initial long and lat for the map as well as its view type
     private void setupMap() {
         if (mMapView != null) {
-            Basemap.Type basemapType = Basemap.Type.STREETS_VECTOR;
+            Basemap.Type basemapType = Basemap.Type.IMAGERY_WITH_LABELS;
             double latitude = 43.8231;
             double longitude = -111.7924;
             int levelOfDetail = 11;
@@ -73,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
             mMapView.setMap(map);
         }
     }
+
     // Override functions for the Arcgis map
     @Override
     protected void onPause() {
@@ -122,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
         mLocationDisplay.setAutoPanMode(LocationDisplay.AutoPanMode.COMPASS_NAVIGATION);
         mLocationDisplay.startAsync();
     }
+
     // Override for if the user chooses to not give location
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -131,4 +155,30 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, getResources().getString(R.string.location_permission_denied), Toast.LENGTH_SHORT).show();
         }
     }
+
+    // Adds the graphic overlay so that the object is visible on the map.
+    private void createGraphicsOverlay() {
+        mGraphicsOverlay = new GraphicsOverlay();
+        mMapView.getGraphicsOverlays().add(mGraphicsOverlay);
+    }
+
+    // This function is what creates the points on the map. For now I am just storing the location data as local variables then putting it into
+    // a location object. This is still a work in progress until I can figure out how to make the points using data from Firebase.
+    private void createPointGraphics() {
+        //Local location variables to use until we get Firebase working
+        double latitude = 43.814538;
+        double longitude = -111.784559;
+        Location loc1 = new Location(latitude, longitude);
+        Point point = new Point(longitude,latitude, SpatialReferences.getWgs84());
+        SimpleMarkerSymbol pointSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.Style.CIRCLE, Color.rgb(226, 119, 40), 10.0f);
+        pointSymbol.setOutline(new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.BLUE, 2.0f));
+        Graphic pointGraphic = new Graphic(point, pointSymbol);
+        mGraphicsOverlay.getGraphics().add(pointGraphic);
+    }
+    // Main function called on setup to allow for multiple graphic integration
+    private void createGraphics() {
+        createGraphicsOverlay();
+        createPointGraphics();
+    }
 }
+
