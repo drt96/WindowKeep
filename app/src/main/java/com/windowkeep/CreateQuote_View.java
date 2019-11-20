@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,33 +15,41 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
+
 /* View and Presenter for creating a quote */
 public class CreateQuote_View extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private Button saveQuote;
-    private EditText name;
-    private EditText address;
-    private EditText email;
-    private EditText phone_number;
-    private EditText small_windows;
-    private EditText medium_windows;
-    private EditText large_windows;
     private FirebaseDatabase database;
+    private Button saveQuote;
+    private EditText address, name, email, phone_number, small_windows, medium_windows, large_windows;
+    private TextView todays_date;
     /* Variables for the small, medium, and large number of windows that change when you select a new spinner option */
-    private static int bS;
-    private static int bM;
-    private static int bL;
-    private static int oneS;
-    private static int oneM;
-    private static int oneL;
-    private static int twoS;
-    private static int twoM;
-    private static int twoL;
-    private static int comS;
-    private static int comM;
-    private static int comL;
+    private static int bS, bM, bL, oneS, oneM, oneL, twoS, twoM, twoL, comS, comM, comL;
+    private Spinner floorsSpinner;
+    private double quoteAmount;
+    private Date todaysDate;
+
+    /* Initialize data */
+    public static void resetWindowCount() {
+        bS = 0;
+        bM = 0;
+        bL = 0;
+        oneS = 0;
+        oneM = 0;
+        oneL = 0;
+        twoS = 0;
+        twoM = 0;
+        twoL = 0;
+        comS = 0;
+        comM = 0;
+        comL = 0;
+    }
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -55,11 +64,12 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         small_windows = findViewById(R.id.eT_sWindows);
         medium_windows = findViewById(R.id.eT_mWindows);
         large_windows = findViewById(R.id.eT_lWindows);
+        todays_date = findViewById(R.id.tV_CurrentDate);
 
         database = FirebaseDatabase.getInstance();
 
         /* Setting up the spinner for selecting which floor to input a number of windows on */
-        Spinner floorsSpinner = findViewById(R.id.s_floors);
+        floorsSpinner = findViewById(R.id.s_floors);
         ArrayAdapter<CharSequence> floorAdapter = ArrayAdapter.createFromResource(this, R.array.numFloors, android.R.layout.simple_spinner_item);
         floorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         floorsSpinner.setAdapter(floorAdapter);
@@ -84,32 +94,25 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
                 if (currentFloor.equalsIgnoreCase("Basement")) {
                     if (!small_windows.getText().toString().equalsIgnoreCase("")) {
                         bS = Integer.parseInt(small_windows.getText().toString());
-                    }
-                    else {
+                    } else {
                         bS = 0;
                     }
-                }
-                else if (currentFloor.equalsIgnoreCase("1")) {
+                } else if (currentFloor.equalsIgnoreCase("1")) {
                     if (!small_windows.getText().toString().equalsIgnoreCase("")) {
                         oneS = Integer.parseInt(small_windows.getText().toString());
-                    }
-                    else {
+                    } else {
                         oneS = 0;
                     }
-                }
-                else if (currentFloor.equalsIgnoreCase("2")) {
+                } else if (currentFloor.equalsIgnoreCase("2")) {
                     if (!small_windows.getText().toString().equalsIgnoreCase("")) {
                         twoS = Integer.parseInt(small_windows.getText().toString());
-                    }
-                    else {
+                    } else {
                         twoS = 0;
                     }
-                }
-                else if (currentFloor.equalsIgnoreCase("Commercial")) {
+                } else if (currentFloor.equalsIgnoreCase("Commercial")) {
                     if (!small_windows.getText().toString().equalsIgnoreCase("")) {
                         comS = Integer.parseInt(small_windows.getText().toString());
-                    }
-                    else {
+                    } else {
                         comS = 0;
                     }
                 }
@@ -134,38 +137,30 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
                 if (currentFloor.equalsIgnoreCase("Basement")) {
                     if (!medium_windows.getText().toString().equalsIgnoreCase("")) {
                         bM = Integer.parseInt(medium_windows.getText().toString());
-                    }
-                    else {
+                    } else {
                         bM = 0;
                     }
-                }
-                else if (currentFloor.equalsIgnoreCase("1")) {
+                } else if (currentFloor.equalsIgnoreCase("1")) {
                     if (!medium_windows.getText().toString().equalsIgnoreCase("")) {
                         oneM = Integer.parseInt(medium_windows.getText().toString());
-                    }
-                    else {
+                    } else {
                         oneM = 0;
                     }
-                }
-                else if (currentFloor.equalsIgnoreCase("2")) {
+                } else if (currentFloor.equalsIgnoreCase("2")) {
                     if (!medium_windows.getText().toString().equalsIgnoreCase("")) {
                         twoM = Integer.parseInt(medium_windows.getText().toString());
-                    }
-                    else {
+                    } else {
                         twoM = 0;
                     }
-                }
-                else if (currentFloor.equalsIgnoreCase("Commercial")) {
+                } else if (currentFloor.equalsIgnoreCase("Commercial")) {
                     if (!medium_windows.getText().toString().equalsIgnoreCase("")) {
                         comM = Integer.parseInt(medium_windows.getText().toString());
-                    }
-                    else {
+                    } else {
                         comM = 0;
                     }
                 }
             }
         };
-
 
         TextWatcher largeTextWatcher = new TextWatcher() {
             @Override
@@ -185,32 +180,25 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
                 if (currentFloor.equalsIgnoreCase("Basement")) {
                     if (!large_windows.getText().toString().equalsIgnoreCase("")) {
                         bL = Integer.parseInt(large_windows.getText().toString());
-                    }
-                    else {
+                    } else {
                         bL = 0;
                     }
-                }
-                else if (currentFloor.equalsIgnoreCase("1")) {
+                } else if (currentFloor.equalsIgnoreCase("1")) {
                     if (!large_windows.getText().toString().equalsIgnoreCase("")) {
                         oneL = Integer.parseInt(large_windows.getText().toString());
-                    }
-                    else {
+                    } else {
                         oneL = 0;
                     }
-                }
-                else if (currentFloor.equalsIgnoreCase("2")) {
+                } else if (currentFloor.equalsIgnoreCase("2")) {
                     if (!large_windows.getText().toString().equalsIgnoreCase("")) {
                         twoL = Integer.parseInt(large_windows.getText().toString());
-                    }
-                    else {
+                    } else {
                         twoL = 0;
                     }
-                }
-                else if (currentFloor.equalsIgnoreCase("Commercial")) {
+                } else if (currentFloor.equalsIgnoreCase("Commercial")) {
                     if (!large_windows.getText().toString().equalsIgnoreCase("")) {
                         comL = Integer.parseInt(large_windows.getText().toString());
-                    }
-                    else {
+                    } else {
                         comL = 0;
                     }
                 }
@@ -265,16 +253,8 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         medium_windows.setOnFocusChangeListener(mediumFocusListener);
         large_windows.setOnFocusChangeListener(largeFocusListener);
 
-
+        setTodaysDate();
     }
-
-
-    public CreateQuote_View() {
-    }
-
-    public CreateQuote_View(String custFirstName, String toString) {
-    }
-
 
     @Override /* This function is an abstract function from the spinner that needs implementation */
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -285,49 +265,45 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
             small_windows.setText("" + bS);
             medium_windows.setText("" + bM);
             large_windows.setText("" + bL);
-        }
-        else if (currentFloor.equalsIgnoreCase("1")) {
+        } else if (currentFloor.equalsIgnoreCase("1")) {
             small_windows.setText("" + oneS);
             medium_windows.setText("" + oneM);
             large_windows.setText("" + oneL);
-        }
-        else if (currentFloor.equalsIgnoreCase("2")) {
+        } else if (currentFloor.equalsIgnoreCase("2")) {
             small_windows.setText("" + twoS);
             medium_windows.setText("" + twoM);
             large_windows.setText("" + twoL);
-        }
-        else if (currentFloor.equalsIgnoreCase("Commercial")) {
+        } else if (currentFloor.equalsIgnoreCase("Commercial")) {
             small_windows.setText("" + comS);
             medium_windows.setText("" + comM);
             large_windows.setText("" + comL);
         }
     }
 
-
     @Override /* This function is an abstract function from the spinner that needs implementation */
     public void onNothingSelected(AdapterView<?> parent) {
-        //Intentionally left blank - an abstract function of the spinner
+        /* Intentionally left blank - an abstract function of the spinner */
     }
-
-
-    public static void resetWindowCount() {
-        bS = 0;
-        bM = 0;
-        bL = 0;
-        oneS = 0;
-        oneM = 0;
-        oneL = 0;
-        twoS = 0;
-        twoM = 0;
-        twoL = 0;
-        comS = 0;
-        comM = 0;
-        comL = 0;
-    }
-
 
     public void openCalendar(View view) {
         Intent intent = new Intent(this, SelectDate_View.class);
         startActivity(intent);
+    }
+
+    public void CalculatePrice() {
+        //Customer customer = new Customer(location, name.toString(), phone_number.toString(), email.toString());
+        //Floors floors = new Floors(int,int,int);
+       // WindowDetails windowDetails = new WindowDetails();
+       // Quote quote = new Quote(qouteDate, customer, WindowDetails windowDetails, double amount) {
+        boolean isCommercial = floorsSpinner.getSelectedItem().toString().equalsIgnoreCase("Commercial");
+       // quoteAmount = quote.calculateAmount(isCommercial);
+
+    }
+
+    public void setTodaysDate() {
+        java.util.Date date = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        String formattedDate = df.format(date);
+        todays_date.setText(formattedDate);
     }
 }

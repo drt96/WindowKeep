@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Create the on click listener and create the create quote activity
         quoteButton = findViewById(R.id.quoteButton);
-        b_Calender = findViewById(R.id.b_Cal);
+        b_Calender = findViewById(R.id.CalenderButton);
     }
 
     public void openQuoteView(View view) {
