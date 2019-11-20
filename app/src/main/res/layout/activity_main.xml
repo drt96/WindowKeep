@@ -22,24 +22,20 @@
         android:id="@+id/CalenderButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="50dp"
         android:onClick="openCalenderView"
         android:text="Go to Calender"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/quoteButton"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/quoteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="55dp"
+        android:layout_marginEnd="32dp"
         android:onClick="openQuoteView"
         android:text="Create Quote"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/CalenderButton" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/CalenderButton"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
