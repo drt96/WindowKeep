@@ -20,8 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class CreateQuote_View extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private FirebaseDatabase database;
-    private Button saveQuote
-    ,address
+    private Button saveQuote;
+    private EditText address
     ,name
     ,email
     ,phone_number
