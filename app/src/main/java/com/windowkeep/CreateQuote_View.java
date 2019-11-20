@@ -253,17 +253,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         small_windows.setOnFocusChangeListener(smallFocusListener);
         medium_windows.setOnFocusChangeListener(mediumFocusListener);
         large_windows.setOnFocusChangeListener(largeFocusListener);
-
-
     }
-
-
-    public CreateQuote_View() {
-    }
-
-    public CreateQuote_View(String custFirstName, String toString) {
-    }
-
 
     @Override /* This function is an abstract function from the spinner that needs implementation */
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -292,12 +282,10 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         }
     }
 
-
     @Override /* This function is an abstract function from the spinner that needs implementation */
     public void onNothingSelected(AdapterView<?> parent) {
-        //Intentionally left blank - an abstract function of the spinner
+        /* Intentionally left blank - an abstract function of the spinner */
     }
-
 
     public static void resetWindowCount() {
         bS = 0;
