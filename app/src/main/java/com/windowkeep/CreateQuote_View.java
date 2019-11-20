@@ -19,28 +19,17 @@ import com.google.firebase.database.FirebaseDatabase;
 /* View and Presenter for creating a quote */
 public class CreateQuote_View extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private Button saveQuote;
-    private EditText name;
-    private EditText address;
-    private EditText email;
-    private EditText phone_number;
-    private EditText small_windows;
-    private EditText medium_windows;
-    private EditText large_windows;
     private FirebaseDatabase database;
+    private Button saveQuote
+    ,address
+    ,name
+    ,email
+    ,phone_number
+    ,small_windows
+    ,medium_windows
+    ,large_windows;
     /* Variables for the small, medium, and large number of windows that change when you select a new spinner option */
-    private static int bS;
-    private static int bM;
-    private static int bL;
-    private static int oneS;
-    private static int oneM;
-    private static int oneL;
-    private static int twoS;
-    private static int twoM;
-    private static int twoL;
-    private static int comS;
-    private static int comM;
-    private static int comL;
+    private static int bS, bM, bL, oneS, oneM, oneL, twoS, twoM, twoL, comS, comM, comL;
 
     @SuppressLint("WrongViewCast")
     @Override
