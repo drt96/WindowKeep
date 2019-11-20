@@ -304,6 +304,6 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         java.util.Date date = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         String formattedDate = df.format(date);
-        todays_date.setText(formattedDate);
+        todays_date.setText("Date: " + formattedDate);
     }
 }
