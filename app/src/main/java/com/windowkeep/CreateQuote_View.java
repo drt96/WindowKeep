@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,9 +15,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
 
 /* View and Presenter for creating a quote */
 public class CreateQuote_View extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -24,10 +28,12 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     private FirebaseDatabase database;
     private Button saveQuote;
     private EditText address, name, email, phone_number, small_windows, medium_windows, large_windows;
+    private TextView todays_date;
     /* Variables for the small, medium, and large number of windows that change when you select a new spinner option */
     private static int bS, bM, bL, oneS, oneM, oneL, twoS, twoM, twoL, comS, comM, comL;
     private Spinner floorsSpinner;
     private double quoteAmount;
+    private Date todaysDate;
 
     /* Initialize data */
     public static void resetWindowCount() {
@@ -58,6 +64,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         small_windows = findViewById(R.id.eT_sWindows);
         medium_windows = findViewById(R.id.eT_mWindows);
         large_windows = findViewById(R.id.eT_lWindows);
+        todays_date = findViewById(R.id.tV_CurrentDate);
 
         database = FirebaseDatabase.getInstance();
 
@@ -245,6 +252,8 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         small_windows.setOnFocusChangeListener(smallFocusListener);
         medium_windows.setOnFocusChangeListener(mediumFocusListener);
         large_windows.setOnFocusChangeListener(largeFocusListener);
+
+        setTodaysDate();
     }
 
     @Override /* This function is an abstract function from the spinner that needs implementation */
@@ -289,5 +298,12 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         boolean isCommercial = floorsSpinner.getSelectedItem().toString().equalsIgnoreCase("Commercial");
        // quoteAmount = quote.calculateAmount(isCommercial);
 
+    }
+
+    public void setTodaysDate() {
+        java.util.Date date = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        String formattedDate = df.format(date);
+        todays_date.setText(formattedDate);
     }
 }
