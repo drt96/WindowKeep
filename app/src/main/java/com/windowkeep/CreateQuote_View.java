@@ -25,10 +25,14 @@ import java.text.SimpleDateFormat;
 /* View and Presenter for creating a quote */
 public class CreateQuote_View extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    // Create FirebaseDatabase variable
     private FirebaseDatabase database;
+
+    // Create calls variables from Activity UI
     private Button saveQuote;
     private EditText address, name, email, phone_number, small_windows, medium_windows, large_windows;
     private TextView todays_date;
+
     /* Variables for the small, medium, and large number of windows that change when you select a new spinner option */
     private static int bS, bM, bL, oneS, oneM, oneL, twoS, twoM, twoL, comS, comM, comL;
     private Spinner floorsSpinner;
@@ -51,12 +55,12 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         comL = 0;
     }
 
-    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_quote);
 
+        // Initialize class variables
         name = findViewById(R.id.eT_Name);
         address = findViewById(R.id.eTM_Address);
         email = findViewById(R.id.eT_Email);
@@ -65,8 +69,18 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         medium_windows = findViewById(R.id.eT_mWindows);
         large_windows = findViewById(R.id.eT_lWindows);
         todays_date = findViewById(R.id.tV_CurrentDate);
+        saveQuote = findViewById(R.id.btn_SaveQuote);
 
+        // Initialize FirebaseDatabase with Instance
         database = FirebaseDatabase.getInstance();
+
+        // Creating onClickListener for "Save Quote" button
+        saveQuote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveToFB();
+            }
+        });
 
         /* Setting up the spinner for selecting which floor to input a number of windows on */
         floorsSpinner = findViewById(R.id.s_floors);
@@ -293,10 +307,10 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     public void CalculatePrice() {
         //Customer customer = new Customer(location, name.toString(), phone_number.toString(), email.toString());
         //Floors floors = new Floors(int,int,int);
-       // WindowDetails windowDetails = new WindowDetails();
-       // Quote quote = new Quote(qouteDate, customer, WindowDetails windowDetails, double amount) {
+        // WindowDetails windowDetails = new WindowDetails();
+        // Quote quote = new Quote(qouteDate, customer, WindowDetails windowDetails, double amount) {
         boolean isCommercial = floorsSpinner.getSelectedItem().toString().equalsIgnoreCase("Commercial");
-       // quoteAmount = quote.calculateAmount(isCommercial);
+        // quoteAmount = quote.calculateAmount(isCommercial);
 
     }
 
@@ -305,5 +319,23 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         String formattedDate = df.format(date);
         todays_date.setText("Date: " + formattedDate);
+    }
+
+        // Method for saving quote data to Firebase Database
+    private void saveToFB () {
+//        Customer customer = new Customer(name.getText().toString());
+
+        // Initialize the database reference based off of the Firebase vaiable above
+        DatabaseReference myReference = database.getReference("Quote Data/Customer");
+//        DatabaseReference quoteAddressData = database.getReference("Address");
+//        quoteCustomerData.setValue(name.getText().toString());
+//        quoteAddressData.setValue(address.getText().toString());
+
+        myReference.setValue(name.getText().toString());
+//        myReference.(address.getText().toString());
+//        database.getReference("Customer").child("Address").setValue(address.getText().toString());
+//        myReference.push().setValue(address.getText().toString());
+
+        finish();
     }
 }
