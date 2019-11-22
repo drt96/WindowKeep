@@ -342,6 +342,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
     }
 
+    /* TODO: I think we could use this throughout, get rid of the date class and instead just member data: String Date */
     public void setTodaysDate() {
         java.util.Date date = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
@@ -360,7 +361,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         finish();
     }
 
-    // Abstact for parcelable
+    /* Abstract for parcelable */
     @Override
     public int describeContents() {
         return 0;

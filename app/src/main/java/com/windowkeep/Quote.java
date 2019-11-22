@@ -48,6 +48,7 @@ public class Quote {
     private static final double lC = 3.50;
 
     /* Private Data */
+    // TODO remove Date class
     private Date qouteDate;
     private Customer customer;
     private WindowDetails windowDetails;
