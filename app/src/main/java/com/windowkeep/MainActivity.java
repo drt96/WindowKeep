@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CreateQuote_View.class);
         Location location = new Location(43, 111);
         intent.putExtra("location", (Parcelable) location);
-        CreateQuote_View.resetWindowCount();
+        CreateQuote_View.resetQuoteFields();
 
         startActivity(intent);
     }

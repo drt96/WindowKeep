@@ -34,8 +34,9 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
     /* Create calls variables from Activity UI. Using "location" for address ET field */
     private Button saveQuote;
-    private EditText name, address, email, phone_number, small_windows, medium_windows, large_windows;
+    private EditText eT_name, eT_address, eT_email, eT_phone_number, small_windows, medium_windows, large_windows;
     private TextView quoteDate;
+    private static String name, address, email, phone_number;
 
     /* Variables for the small, medium, and large number of windows that change when you select a new spinner option */
     private static int bS, bM, bL, oneS, oneM, oneL, twoS, twoM, twoL, comS, comM, comL;
@@ -69,7 +70,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     };
 
     /* Initialize data */
-    public static void resetWindowCount() {
+    public static void resetQuoteFields() {
         bS = 0;
         bM = 0;
         bL = 0;
@@ -82,6 +83,10 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         comS = 0;
         comM = 0;
         comL = 0;
+        name = "";
+        address = "";
+        phone_number = "";
+        email = "";
     }
 
     @Override
@@ -91,21 +96,23 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
         /* Get class variables */
         quoteDate = findViewById(R.id.tV_CurrentDate);
-        name = findViewById(R.id.eT_Name);
-        address = findViewById(R.id.eTM_Address);
-        email = findViewById(R.id.eT_Email);
-        phone_number = findViewById(R.id.eT_Phone);
+        eT_name = findViewById(R.id.eT_Name);
+        eT_address = findViewById(R.id.eTM_Address);
+        eT_email = findViewById(R.id.eT_Email);
+        eT_phone_number = findViewById(R.id.eT_Phone);
         small_windows = findViewById(R.id.eT_sWindows);
         medium_windows = findViewById(R.id.eT_mWindows);
         large_windows = findViewById(R.id.eT_lWindows);
         saveQuote = findViewById(R.id.btn_SaveQuote);
+
+        fillTextFields();
 
         Intent incomingIntent = getIntent();
 
         // TODO Is this working
         if (incomingIntent != null) {
             location = incomingIntent.getParcelableExtra("location");
-            Log.i("loc", location.getLatitude() + " " + location.getLongitude());
+            // Log.i("loc", location.getLatitude() + " " + location.getLongitude());
         }
 
         /* Initialize FirebaseDatabase with Instance */
@@ -125,6 +132,30 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         floorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         floorsSpinner.setAdapter(floorAdapter);
         floorsSpinner.setOnItemSelectedListener(this);
+
+        // Textwatcher for the text fields at the top (name, email, etc). This will save the info
+        // put in the fields and repopulate the text boxes when we leave the view and come back to it.
+        // Without this, the fields will be blank when we leave the view and return to it (IE when we select a
+        // date from the calendar and then return to the createQuoteView)
+        TextWatcher inputFieldsWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                name = eT_name.getText().toString();
+                address = eT_address.getText().toString();
+                email = eT_email.getText().toString();
+                phone_number = eT_phone_number.getText().toString();
+            }
+        };
+
+
 
         /* A listener for when number of windows editText changes */
         TextWatcher smallTextWatcher = new TextWatcher() {
@@ -221,7 +252,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // Do nothing!
+                // Do nothing
             }
 
             @Override
@@ -300,6 +331,11 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         medium_windows.addTextChangedListener(mediumTextWatcher);
         large_windows.addTextChangedListener(largeTextWatcher);
 
+        eT_name.addTextChangedListener(inputFieldsWatcher);
+        eT_address.addTextChangedListener(inputFieldsWatcher);
+        eT_email.addTextChangedListener(inputFieldsWatcher);
+        eT_phone_number.addTextChangedListener(inputFieldsWatcher);
+
         small_windows.setOnFocusChangeListener(smallFocusListener);
         medium_windows.setOnFocusChangeListener(mediumFocusListener);
         large_windows.setOnFocusChangeListener(largeFocusListener);
@@ -344,7 +380,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     // TODO: This is what we need to get done next
     public void CalculatePrice() {
 
-        Customer customer = new Customer(location, name.toString(), phone_number.toString(), email.toString());
+        Customer customer = new Customer(location, eT_name.toString(), eT_phone_number.toString(), eT_email.toString());
         // Floors floors = new Floors(int,int,int);
         // WindowDetails windowDetails = new WindowDetails();
         // Quote quote = new Quote(qouteDate, customer, WindowDetails windowDetails, double amount) {
@@ -361,6 +397,13 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         quoteDate.setText("Date: " + formattedDate);
     }
 
+    public void fillTextFields() {
+        eT_name.setText(name);
+        eT_email.setText(email);
+        eT_phone_number.setText(phone_number);
+        eT_address.setText(address);
+    }
+
     /* Method for saving quote data to Firebase Database */
     private void saveToFB() {
         /*
@@ -369,8 +412,8 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
          we're passing the Location class to the Customer class
          via Parcelable
         */
-        Customer customer = new Customer(location, name.getText().toString(), phone_number.getText().toString()
-                , email.getText().toString());
+        Customer customer = new Customer(location, eT_name.getText().toString(), eT_phone_number.getText().toString()
+                , eT_email.getText().toString());
 
         /* Initialize the database reference based off of the Firebase vaiable above */
         DatabaseReference myReference = database.getReference();
