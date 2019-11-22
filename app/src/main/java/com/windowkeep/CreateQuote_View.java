@@ -29,25 +29,28 @@ import java.text.SimpleDateFormat;
 @SuppressLint("ParcelCreator")
 public class CreateQuote_View extends AppCompatActivity implements AdapterView.OnItemSelectedListener, Parcelable {
 
-    // Create FirebaseDatabase variable
+    /* Create FirebaseDatabase variable */
     private FirebaseDatabase database;
 
-    // Create calls variables from Activity UI. Using "location" for address ET field
+    /* Create calls variables from Activity UI. Using "location" for address ET field */
     private Button saveQuote;
     private EditText name, address, email, phone_number, small_windows, medium_windows, large_windows;
-    private TextView todays_date;
+    private TextView quoteDate;
 
     /* Variables for the small, medium, and large number of windows that change when you select a new spinner option */
     private static int bS, bM, bL, oneS, oneM, oneL, twoS, twoM, twoL, comS, comM, comL;
     private Spinner floorsSpinner;
     private double quoteAmount;
-    private Date todaysDate;
+    private String date;
     private Location location;
 
-    public CreateQuote_View() {}
+    public CreateQuote_View() {
+    }
 
-    // This is the Create_View constructor for the Location
-    // class Parcel.
+    /*
+     This is the Create_View constructor for the Location
+     class Parcel.
+    */
     protected CreateQuote_View(Parcel in) {
         quoteAmount = in.readDouble();
     }
@@ -85,7 +88,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_quote);
 
-        // Initialize class variables
+        /* Initialize class variables */
         name = findViewById(R.id.eT_Name);
         address = findViewById(R.id.eTM_Address);
         email = findViewById(R.id.eT_Email);
@@ -93,7 +96,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         small_windows = findViewById(R.id.eT_sWindows);
         medium_windows = findViewById(R.id.eT_mWindows);
         large_windows = findViewById(R.id.eT_lWindows);
-        todays_date = findViewById(R.id.tV_CurrentDate);
+        quoteDate = findViewById(R.id.tV_CurrentDate);
         saveQuote = findViewById(R.id.btn_SaveQuote);
 
         Intent incomingIntent = getIntent();
@@ -101,10 +104,10 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
             location = incomingIntent.getParcelableExtra("location");
             Log.i("loc", location.getLatitude() + " " + location.getLongitude());
         }
-        // Initialize FirebaseDatabase with Instance
+        /* Initialize FirebaseDatabase with Instance */
         database = FirebaseDatabase.getInstance();
 
-        // Creating onClickListener for "Save Quote" button
+        /* Creating onClickListener for "Save Quote" button */
         saveQuote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -349,7 +352,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         java.util.Date date = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         String formattedDate = df.format(date);
-        todays_date.setText("Date: " + formattedDate);
+        quoteDate.setText("Date: " + formattedDate);
     }
 
     // Method for saving quote data to Firebase Database

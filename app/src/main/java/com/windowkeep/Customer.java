@@ -9,8 +9,8 @@ public class Customer {
     private Location location;
     private String name;
     private String phoneNumber;
-    private Description description;
     private String email;
+    private Description description;
 
     /*
      Constructors:

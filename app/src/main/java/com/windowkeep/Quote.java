@@ -48,7 +48,7 @@ public class Quote {
     private static final double lC = 3.50;
 
     /* Private Data */
-    private String qouteDate;
+    private String quoteDate;
     private Customer customer;
     private WindowDetails windowDetails;
     private double amount;
@@ -58,8 +58,8 @@ public class Quote {
     public Quote() {
     }
 
-    public Quote(String qouteDate, Customer customer, WindowDetails windowDetails, double amount) {
-        this.qouteDate = qouteDate;
+    public Quote(String quoteDate, Customer customer, WindowDetails windowDetails, double amount) {
+        this.quoteDate = quoteDate;
         this.customer = customer;
         this.windowDetails = windowDetails;
         this.amount = amount;
@@ -67,12 +67,12 @@ public class Quote {
 
     /* Getters and Setters */
 
-    public String getQouteDate() {
-        return qouteDate;
+    public String getQuoteDate() {
+        return quoteDate;
     }
 
-    public void setQouteDate(String qouteDate) {
-        this.qouteDate = qouteDate;
+    public void setQuoteDate(String quoteDate) {
+        this.quoteDate = quoteDate;
     }
 
     public Customer getCustomer() {
@@ -136,7 +136,7 @@ public class Quote {
     public String toString() {
         return "Quote:" +
                 /* Date, customer and WindowDetails has their own toString */
-                "\nQuote " + qouteDate +
+                "\nQuote " + quoteDate +
                 "\n" + customer +
                 "\nWindow Details: " + windowDetails +
                 "\n$ " + amount;
