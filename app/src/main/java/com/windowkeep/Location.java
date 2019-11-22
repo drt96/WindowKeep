@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 /*
     Handles the logic to make and use locations, the ID of the Application
+    To pass Location to the Customer class, we need to implement "Parcelable"
  */
 public class Location implements Parcelable {
     private double latitude;
@@ -21,17 +22,23 @@ public class Location implements Parcelable {
         this.longitude = longitude;
     }
 
+    // Parcelable creates an "in" object which will read the data and
+    // store it in "in"
     protected Location(Parcel in) {
         latitude = in.readDouble();
         longitude = in.readDouble();
     }
 
+    // The Creator method is implemented and creates a new Creator
+    // from the data in "in"
     public static final Creator<Location> CREATOR = new Creator<Location>() {
         @Override
         public Location createFromParcel(Parcel in) {
             return new Location(in);
         }
 
+        // A new array is created and matches the size of the
+        // variables as its "size"
         @Override
         public Location[] newArray(int size) {
             return new Location[size];
@@ -47,7 +54,9 @@ public class Location implements Parcelable {
         this.longitude = latitude;
     }
 
-    public double getLongitude() {return longitude; }
+    public double getLongitude() {
+        return longitude;
+    }
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;

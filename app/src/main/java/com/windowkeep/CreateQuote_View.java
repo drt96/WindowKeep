@@ -46,6 +46,8 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
     public CreateQuote_View() {}
 
+    // This is the Create_View constructor for the Location
+    // class Parcel.
     protected CreateQuote_View(Parcel in) {
         quoteAmount = in.readDouble();
     }
@@ -352,6 +354,10 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
     // Method for saving quote data to Firebase Database
     private void saveToFB() {
+        // Create the new customer passing in values from activity.
+        // We don't need getText and toString for location because
+        // we're passing the Location class to the Customer class
+        // via Parcelable
         Customer customer = new Customer(location, name.getText().toString(), phone_number.getText().toString()
                 , email.getText().toString());
 
@@ -359,6 +365,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         DatabaseReference myReference = database.getReference();
         myReference.child("Quote Data").push().setValue(customer);
         finish();
+
     }
 
     /* Abstract for parcelable */
