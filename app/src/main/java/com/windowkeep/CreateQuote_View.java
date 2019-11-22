@@ -97,6 +97,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         Intent incomingIntent = getIntent();
         if (incomingIntent != null) {
             location = incomingIntent.getParcelableExtra("location");
+            Log.i("loc", location.getLatitude() + " " + location.getLongitude());
         }
         // Initialize FirebaseDatabase with Instance
         database = FirebaseDatabase.getInstance();
@@ -353,18 +354,9 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         Customer customer = new Customer(location, name.getText().toString(), phone_number.getText().toString()
                 , email.getText().toString());
 
-
         // Initialize the database reference based off of the Firebase vaiable above
         DatabaseReference myReference = database.getReference("Quote Data/Customer");
-//        DatabaseReference quoteAddressData = database.getReference("Address");
-//        quoteCustomerData.setValue(name.getText().toString());
-//        quoteAddressData.setValue(address.getText().toString());
-
-        myReference.setValue(name.getText().toString());
-//        myReference.(address.getText().toString());
-//        database.getReference("Customer").child("Address").setValue(address.getText().toString());
-//        myReference.push().setValue(address.getText().toString());
-
+        myReference.setValue(customer);
         finish();
     }
 
