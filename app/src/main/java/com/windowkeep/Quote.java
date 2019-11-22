@@ -58,11 +58,10 @@ public class Quote {
     public Quote() {
     }
 
-    public Quote(String quoteDate, Customer customer, WindowDetails windowDetails, double amount) {
+    public Quote(String quoteDate, Customer customer, WindowDetails windowDetails) {
         this.quoteDate = quoteDate;
         this.customer = customer;
         this.windowDetails = windowDetails;
-        this.amount = amount;
     }
 
     /* Getters and Setters */

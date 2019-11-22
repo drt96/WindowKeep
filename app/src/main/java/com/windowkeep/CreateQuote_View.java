@@ -24,6 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.lang.reflect.Constructor;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /* View and Presenter for creating a quote */
 @SuppressLint("ParcelCreator")
@@ -41,9 +43,15 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     /* Variables for the small, medium, and large number of windows that change when you select a new spinner option */
     private static int bS, bM, bL, oneS, oneM, oneL, twoS, twoM, twoL, comS, comM, comL;
     private Spinner floorsSpinner;
-    private double quoteAmount;
     private static double latitude, longitude;
     private Location location;
+
+    /* Member data used to populate the windowDetails class for each quote */
+    private Floors basement, one, two, commercial;
+    private List<Floors> floorsList;
+
+    private Quote quote;
+    private double quoteAmount;
 
     private String date;
 
@@ -90,9 +98,6 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         email = "";
     }
 
-    /* Member data used to populate the windowDetails class for each quote */
-    Floors basement, one, two, commercial;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,10 +114,19 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         large_windows = findViewById(R.id.eT_lWindows);
         saveQuote = findViewById(R.id.btn_SaveQuote);
 
+        /* Todo DON'T FORGET ABOUT THIS */
+        floorsList = new ArrayList<Floors>();
+        floorsList.add(basement);
+        floorsList.add(one);
+        floorsList.add(two);
+        floorsList.add(commercial);
+
         fillTextFields();
 
-        // Sets the location of the current quote and keeps it consistent as we change to and from the selectDate view.
-        // Just some error checking to make sure the location is correct
+        /*
+         Sets the location of the current quote and keeps it consistent as we change to and from the selectDate view.
+         Just some error checking to make sure the location is correct
+        */
         Intent incomingIntent = getIntent();
         if (    incomingIntent.getExtras().getDouble("longitude") != 0 &&
                 incomingIntent.getExtras().getDouble("latitude") != 0) {
@@ -126,7 +140,6 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
             location = new Location(latitude, longitude);
             Log.i("loc", location.getLatitude() + " " + location.getLongitude());
         }
-
 
         /* Initialize FirebaseDatabase with Instance */
         database = FirebaseDatabase.getInstance();
@@ -146,10 +159,12 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         floorsSpinner.setAdapter(floorAdapter);
         floorsSpinner.setOnItemSelectedListener(this);
 
-        // Textwatcher for the text fields at the top (name, email, etc). This will save the info
-        // put in the fields and repopulate the text boxes when we leave the view and come back to it.
-        // Without this, the fields will be blank when we leave the view and return to it (IE when we select a
-        // date from the calendar and then return to the createQuoteView)
+        /*
+         Textwatcher for the text fields at the top (name, email, etc). This will save the info
+         put in the fields and repopulate the text boxes when we leave the view and come back to it.
+         Without this, the fields will be blank when we leave the view and return to it (IE when we select a
+         date from the calendar and then return to the createQuoteView)
+        */
         TextWatcher inputFieldsWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -402,13 +417,11 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
     // TODO: This is what we need to get done next
     public void CalculatePrice() {
-
         Customer customer = new Customer(location, eT_name.toString(), eT_phone_number.toString(), eT_email.toString());
-        // Floors floors = new Floors(int,int,int);
-        // WindowDetails windowDetails = new WindowDetails();
-        // Quote quote = new Quote(qouteDate, customer, WindowDetails windowDetails, double amount) {
+        WindowDetails windowDetails = new WindowDetails(floorsList);
+        quote = new Quote(date, customer, windowDetails);
         boolean isCommercial = floorsSpinner.getSelectedItem().toString().equalsIgnoreCase("Commercial");
-        // quoteAmount = quote.calculateAmount(isCommercial);
+        quoteAmount = quote.calculateAmount(isCommercial);
 
     }
 
