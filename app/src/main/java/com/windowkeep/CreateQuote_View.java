@@ -41,8 +41,9 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     private static int bS, bM, bL, oneS, oneM, oneL, twoS, twoM, twoL, comS, comM, comL;
     private Spinner floorsSpinner;
     private double quoteAmount;
-    private String date;
     private Location location;
+
+    private String date;
 
     public CreateQuote_View() {
     }
@@ -88,7 +89,8 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_quote);
 
-        /* Initialize class variables */
+        /* Get class variables */
+        quoteDate = findViewById(R.id.tV_CurrentDate);
         name = findViewById(R.id.eT_Name);
         address = findViewById(R.id.eTM_Address);
         email = findViewById(R.id.eT_Email);
@@ -96,14 +98,16 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         small_windows = findViewById(R.id.eT_sWindows);
         medium_windows = findViewById(R.id.eT_mWindows);
         large_windows = findViewById(R.id.eT_lWindows);
-        quoteDate = findViewById(R.id.tV_CurrentDate);
         saveQuote = findViewById(R.id.btn_SaveQuote);
 
         Intent incomingIntent = getIntent();
+
+        // TODO Is this working
         if (incomingIntent != null) {
             location = incomingIntent.getParcelableExtra("location");
             Log.i("loc", location.getLatitude() + " " + location.getLongitude());
         }
+
         /* Initialize FirebaseDatabase with Instance */
         database = FirebaseDatabase.getInstance();
 
@@ -337,9 +341,11 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         startActivity(intent);
     }
 
+    // TODO: This is what we need to get done next
     public void CalculatePrice() {
-        //Customer customer = new Customer(location, name.toString(), phone_number.toString(), email.toString());
-        //Floors floors = new Floors(int,int,int);
+
+        Customer customer = new Customer(location, name.toString(), phone_number.toString(), email.toString());
+        // Floors floors = new Floors(int,int,int);
         // WindowDetails windowDetails = new WindowDetails();
         // Quote quote = new Quote(qouteDate, customer, WindowDetails windowDetails, double amount) {
         boolean isCommercial = floorsSpinner.getSelectedItem().toString().equalsIgnoreCase("Commercial");
@@ -355,16 +361,18 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         quoteDate.setText("Date: " + formattedDate);
     }
 
-    // Method for saving quote data to Firebase Database
+    /* Method for saving quote data to Firebase Database */
     private void saveToFB() {
-        // Create the new customer passing in values from activity.
-        // We don't need getText and toString for location because
-        // we're passing the Location class to the Customer class
-        // via Parcelable
+        /*
+         Create the new customer passing in values from activity.
+         We don't need getText and toString for location because
+         we're passing the Location class to the Customer class
+         via Parcelable
+        */
         Customer customer = new Customer(location, name.getText().toString(), phone_number.getText().toString()
                 , email.getText().toString());
 
-        // Initialize the database reference based off of the Firebase vaiable above
+        /* Initialize the database reference based off of the Firebase vaiable above */
         DatabaseReference myReference = database.getReference();
         myReference.child("Quote Data").push().setValue(customer);
         finish();
