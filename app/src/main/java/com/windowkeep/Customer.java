@@ -17,21 +17,19 @@ public class Customer {
      Not every customer will have a phone number but if an apt is made an email is needed
     */
 
-    // Default for create quote activity
-    public Customer(String name) {}
-
+    /* Default for create quote activity */
     public Customer(Location location) {
         this.location = location;
     }
 
-    // Default Coçnstructor for appointment
+    /* Default Constructor for appointment */
     public Customer(Location location, String name, String email) {
         this.location = location;
         this.name = name;
         this.email = email;
     }
 
-    // Constructor with all information
+    /* Constructor with all information if provided */
     public Customer(Location location, String name, String phoneNumber, String email) {
         this.location = location;
         this.name = name;

@@ -22,23 +22,29 @@ public class Location implements Parcelable {
         this.longitude = longitude;
     }
 
-    // Parcelable creates an "in" object which will read the data and
-    // store it in "in"
+    /*
+     Parcelable creates an "in" object which will read the data and
+     store it in "in"
+    */
     protected Location(Parcel in) {
         latitude = in.readDouble();
         longitude = in.readDouble();
     }
 
-    // The Creator method is implemented and creates a new Creator
-    // from the data in "in"
+    /*
+     The Creator method is implemented and creates a new Creator
+     from the data in "in"
+    */
     public static final Creator<Location> CREATOR = new Creator<Location>() {
         @Override
         public Location createFromParcel(Parcel in) {
             return new Location(in);
         }
 
-        // A new array is created and matches the size of the
-        // variables as its "size"
+        /*
+         A new array is created and matches the size of the
+         variables as its "size"
+        */
         @Override
         public Location[] newArray(int size) {
             return new Location[size];

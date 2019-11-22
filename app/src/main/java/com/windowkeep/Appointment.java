@@ -2,7 +2,7 @@ package com.windowkeep;
 
 /* A class to handle the data for the creation and editing of one appointment */
 public class Appointment {
-    private Date appointmentDate;
+    private String appointmentDate;
     private Quote quote;
 
     /*
@@ -13,17 +13,17 @@ public class Appointment {
      So that we can have multiple appointments with each customer.
      (SEE toString if that doesn't make sense)
     */
-    public Appointment(Date appointmentDate, Quote quote) {
+    public Appointment(String appointmentDate, Quote quote) {
         this.appointmentDate = appointmentDate;
         this.quote = quote;
     }
 
     /* Getters and setters */
-    public Date getAppointmentDate() {
+    public String getAppointmentDate() {
         return appointmentDate;
     }
 
-    public void setAppointmentDate(Date appointmentDate) {
+    public void setAppointmentDate(String appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
 

@@ -48,8 +48,7 @@ public class Quote {
     private static final double lC = 3.50;
 
     /* Private Data */
-    // TODO remove Date class
-    private Date qouteDate;
+    private String qouteDate;
     private Customer customer;
     private WindowDetails windowDetails;
     private double amount;
@@ -57,12 +56,9 @@ public class Quote {
 
     /* These should be the only constructors that should be needed */
     public Quote() {
-        this.qouteDate = qouteDate;
-        this.customer = customer;
-        this.windowDetails = windowDetails;
     }
 
-    public Quote(Date qouteDate, Customer customer, WindowDetails windowDetails, double amount) {
+    public Quote(String qouteDate, Customer customer, WindowDetails windowDetails, double amount) {
         this.qouteDate = qouteDate;
         this.customer = customer;
         this.windowDetails = windowDetails;
@@ -70,11 +66,12 @@ public class Quote {
     }
 
     /* Getters and Setters */
-    public Date getQouteDate() {
+
+    public String getQouteDate() {
         return qouteDate;
     }
 
-    public void setQouteDate(Date qouteDate) {
+    public void setQouteDate(String qouteDate) {
         this.qouteDate = qouteDate;
     }
 
