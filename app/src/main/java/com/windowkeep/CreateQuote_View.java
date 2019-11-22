@@ -356,8 +356,8 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
                 , email.getText().toString());
 
         // Initialize the database reference based off of the Firebase vaiable above
-        DatabaseReference myReference = database.getReference("Quote Data/Customer");
-        myReference.setValue(customer);
+        DatabaseReference myReference = database.getReference();
+        myReference.child("Quote Data").push().setValue(customer);
         finish();
     }
 
