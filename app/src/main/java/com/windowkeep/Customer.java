@@ -24,7 +24,7 @@ public class Customer {
         this.location = location;
     }
 
-    // Default Constructor for appointment
+    // Default Coçnstructor for appointment
     public Customer(Location location, String name, String email) {
         this.location = location;
         this.name = name;
