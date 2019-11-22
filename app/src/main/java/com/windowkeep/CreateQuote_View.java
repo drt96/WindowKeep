@@ -42,6 +42,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     private static int bS, bM, bL, oneS, oneM, oneL, twoS, twoM, twoL, comS, comM, comL;
     private Spinner floorsSpinner;
     private double quoteAmount;
+    private static double latitude, longitude;
     private Location location;
 
     private String date;
@@ -107,13 +108,22 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
         fillTextFields();
 
+        // Sets the location of the current quote and keeps it consistent as we change to and from the selectDate view.
+        // Just some error checking to make sure the location is correct
         Intent incomingIntent = getIntent();
-
-        // TODO Is this working
-        if (incomingIntent.getParcelableExtra("location") != null) {
-            location = incomingIntent.getParcelableExtra("location");
+        if (    incomingIntent.getExtras().getDouble("longitude") != 0 &&
+                incomingIntent.getExtras().getDouble("latitude") != 0) {
+            Bundle extras = incomingIntent.getExtras();
+            location = new Location(extras.getDouble("latitude"), extras.getDouble("longitude"));
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
             Log.i("loc", location.getLatitude() + " " + location.getLongitude());
         }
+        else {
+            location = new Location(latitude, longitude);
+            Log.i("loc", location.getLatitude() + " " + location.getLongitude());
+        }
+
 
         /* Initialize FirebaseDatabase with Instance */
         database = FirebaseDatabase.getInstance();
@@ -154,8 +164,6 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
                 phone_number = eT_phone_number.getText().toString();
             }
         };
-
-
 
         /* A listener for when number of windows editText changes */
         TextWatcher smallTextWatcher = new TextWatcher() {

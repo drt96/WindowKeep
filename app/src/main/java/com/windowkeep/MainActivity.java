@@ -74,11 +74,16 @@ public class MainActivity extends AppCompatActivity {
 
     // Activity for quote view
     public void openQuoteView(View view) {
+        // Hardcoded location for testing purposes. We will want to change the hardcoded 43, 111 values to whatever the location of the pin is
         Intent intent = new Intent(this, CreateQuote_View.class);
         Location location = new Location(43, 111);
-        intent.putExtra("location", (Parcelable) location);
-        CreateQuote_View.resetQuoteFields();
+        Bundle extras = new Bundle();
 
+        extras.putDouble("latitude", location.getLatitude());
+        extras.putDouble("longitude", location.getLongitude());
+        intent.putExtras(extras);
+
+        CreateQuote_View.resetQuoteFields();
         startActivity(intent);
     }
 
