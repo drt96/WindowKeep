@@ -110,9 +110,9 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         Intent incomingIntent = getIntent();
 
         // TODO Is this working
-        if (incomingIntent != null) {
+        if (incomingIntent.getParcelableExtra("location") != null) {
             location = incomingIntent.getParcelableExtra("location");
-            // Log.i("loc", location.getLatitude() + " " + location.getLongitude());
+            Log.i("loc", location.getLatitude() + " " + location.getLongitude());
         }
 
         /* Initialize FirebaseDatabase with Instance */
