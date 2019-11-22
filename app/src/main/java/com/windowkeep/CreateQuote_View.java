@@ -90,6 +90,9 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         email = "";
     }
 
+    /* Member data used to populate the windowDetails class for each quote */
+    Floors basement, one, two, commercial;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -187,24 +190,28 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
                     } else {
                         bS = 0;
                     }
+                    basement.setSmall(bS);
                 } else if (currentFloor.equalsIgnoreCase("1")) {
                     if (!small_windows.getText().toString().equalsIgnoreCase("")) {
                         oneS = Integer.parseInt(small_windows.getText().toString());
                     } else {
                         oneS = 0;
                     }
+                    one.setSmall(oneS);
                 } else if (currentFloor.equalsIgnoreCase("2")) {
                     if (!small_windows.getText().toString().equalsIgnoreCase("")) {
                         twoS = Integer.parseInt(small_windows.getText().toString());
                     } else {
                         twoS = 0;
                     }
+                    two.setSmall(twoS);
                 } else if (currentFloor.equalsIgnoreCase("Commercial")) {
                     if (!small_windows.getText().toString().equalsIgnoreCase("")) {
                         comS = Integer.parseInt(small_windows.getText().toString());
                     } else {
                         comS = 0;
                     }
+                    commercial.setSmall(comS);
                 }
             }
         };
@@ -230,24 +237,28 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
                     } else {
                         bM = 0;
                     }
+                    basement.setMedium(bM);
                 } else if (currentFloor.equalsIgnoreCase("1")) {
                     if (!medium_windows.getText().toString().equalsIgnoreCase("")) {
                         oneM = Integer.parseInt(medium_windows.getText().toString());
                     } else {
                         oneM = 0;
                     }
+                    one.setMedium(oneM);
                 } else if (currentFloor.equalsIgnoreCase("2")) {
                     if (!medium_windows.getText().toString().equalsIgnoreCase("")) {
                         twoM = Integer.parseInt(medium_windows.getText().toString());
                     } else {
                         twoM = 0;
                     }
+                    two.setMedium(twoM);
                 } else if (currentFloor.equalsIgnoreCase("Commercial")) {
                     if (!medium_windows.getText().toString().equalsIgnoreCase("")) {
                         comM = Integer.parseInt(medium_windows.getText().toString());
                     } else {
                         comM = 0;
                     }
+                    commercial.setMedium(comM);
                 }
             }
         };
@@ -273,24 +284,28 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
                     } else {
                         bL = 0;
                     }
+                    basement.setLarge(bL);
                 } else if (currentFloor.equalsIgnoreCase("1")) {
                     if (!large_windows.getText().toString().equalsIgnoreCase("")) {
                         oneL = Integer.parseInt(large_windows.getText().toString());
                     } else {
                         oneL = 0;
                     }
+                    one.setLarge(oneL);
                 } else if (currentFloor.equalsIgnoreCase("2")) {
                     if (!large_windows.getText().toString().equalsIgnoreCase("")) {
                         twoL = Integer.parseInt(large_windows.getText().toString());
                     } else {
                         twoL = 0;
                     }
+                    two.setLarge(twoL);
                 } else if (currentFloor.equalsIgnoreCase("Commercial")) {
                     if (!large_windows.getText().toString().equalsIgnoreCase("")) {
                         comL = Integer.parseInt(large_windows.getText().toString());
                     } else {
                         comL = 0;
                     }
+                    commercial.setLarge(comL);
                 }
             }
         };
