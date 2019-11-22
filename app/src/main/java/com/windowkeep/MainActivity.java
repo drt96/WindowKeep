@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     // Create variable for button
     private Button quoteButton;
     private Button b_Calender;
+    private Location location;
 
     // Constraint Variable for MapView
     private MapView mMapView;
@@ -63,22 +65,24 @@ public class MainActivity extends AppCompatActivity {
         setupLocationDisplay();
         createGraphics();
 
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-        myRef.setValue("Hello, World!");
-
         //Create the on click listener and create the create quote activity
         quoteButton = findViewById(R.id.quoteButton);
         b_Calender = findViewById(R.id.CalenderButton);
+
+//        location = new Location(43, 111);
     }
 
+    // Activity for quote view
     public void openQuoteView(View view) {
         Intent intent = new Intent(this, CreateQuote_View.class);
+        Location location = new Location(43, 111);
+        intent.putExtra("location", (Parcelable) location);
         CreateQuote_View.resetWindowCount();
+
         startActivity(intent);
     }
 
+    // Activity for calender view
     public void openCalenderView(View view) {
         Intent intent = new Intent(this, SelectDate_View.class);
         startActivity(intent);
@@ -95,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             mMapView.setMap(map);
         }
     }
+
 
     // Override functions for the Arcgis map
     @Override

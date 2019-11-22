@@ -1,5 +1,7 @@
 package com.windowkeep;
 
+import android.widget.EditText;
+
 /*
     Handles the logic to make and use Customers
  */
@@ -14,6 +16,10 @@ public class Customer {
      Constructors:
      Not every customer will have a phone number but if an apt is made an email is needed
     */
+
+    // Default for create quote activity
+    public Customer(String name) {}
+
     public Customer(Location location) {
         this.location = location;
     }
@@ -32,6 +38,7 @@ public class Customer {
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
+
 
     /* Getters and Setters */
     public Location getLocation() {

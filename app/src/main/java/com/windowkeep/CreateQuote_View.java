@@ -6,6 +6,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -20,17 +22,19 @@ import android.widget.TextView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.lang.reflect.Constructor;
 import java.text.SimpleDateFormat;
 
 /* View and Presenter for creating a quote */
-public class CreateQuote_View extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+@SuppressLint("ParcelCreator")
+public class CreateQuote_View extends AppCompatActivity implements AdapterView.OnItemSelectedListener, Parcelable {
 
     // Create FirebaseDatabase variable
     private FirebaseDatabase database;
 
-    // Create calls variables from Activity UI
+    // Create calls variables from Activity UI. Using "location" for address ET field
     private Button saveQuote;
-    private EditText address, name, email, phone_number, small_windows, medium_windows, large_windows;
+    private EditText name, address, email, phone_number, small_windows, medium_windows, large_windows;
     private TextView todays_date;
 
     /* Variables for the small, medium, and large number of windows that change when you select a new spinner option */
@@ -38,6 +42,25 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     private Spinner floorsSpinner;
     private double quoteAmount;
     private Date todaysDate;
+    private Location location;
+
+    public CreateQuote_View() {}
+
+    protected CreateQuote_View(Parcel in) {
+        quoteAmount = in.readDouble();
+    }
+
+    public static final Creator<CreateQuote_View> CREATOR = new Creator<CreateQuote_View>() {
+        @Override
+        public CreateQuote_View createFromParcel(Parcel in) {
+            return new CreateQuote_View(in);
+        }
+
+        @Override
+        public CreateQuote_View[] newArray(int size) {
+            return new CreateQuote_View[size];
+        }
+    };
 
     /* Initialize data */
     public static void resetWindowCount() {
@@ -71,6 +94,10 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         todays_date = findViewById(R.id.tV_CurrentDate);
         saveQuote = findViewById(R.id.btn_SaveQuote);
 
+        Intent incomingIntent = getIntent();
+        if (incomingIntent != null) {
+            location = incomingIntent.getParcelableExtra("location");
+        }
         // Initialize FirebaseDatabase with Instance
         database = FirebaseDatabase.getInstance();
 
@@ -321,9 +348,11 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         todays_date.setText("Date: " + formattedDate);
     }
 
-        // Method for saving quote data to Firebase Database
-    private void saveToFB () {
-//        Customer customer = new Customer(name.getText().toString());
+    // Method for saving quote data to Firebase Database
+    private void saveToFB() {
+        Customer customer = new Customer(location, name.getText().toString(), phone_number.getText().toString()
+                , email.getText().toString());
+
 
         // Initialize the database reference based off of the Firebase vaiable above
         DatabaseReference myReference = database.getReference("Quote Data/Customer");
@@ -337,5 +366,16 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 //        myReference.push().setValue(address.getText().toString());
 
         finish();
+    }
+
+    // Abstact for parcelable
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDouble(quoteAmount);
     }
 }
