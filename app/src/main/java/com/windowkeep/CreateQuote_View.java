@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -37,7 +38,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     /* Create calls variables from Activity UI. Using "location" for address ET field */
     private Button saveQuote;
     private EditText eT_name, eT_address, eT_email, eT_phone_number, small_windows, medium_windows, large_windows;
-    private TextView quoteDate;
+    private TextView quoteDate, totalPrice;
     private static String name, address, email, phone_number;
 
     /* Variables for the small, medium, and large number of windows that change when you select a new spinner option */
@@ -105,6 +106,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
         /* Get class variables */
         quoteDate = findViewById(R.id.tV_CurrentDate);
+        totalPrice = findViewById(R.id.tV_TotalPrice);
         eT_name = findViewById(R.id.eT_Name);
         eT_address = findViewById(R.id.eTM_Address);
         eT_email = findViewById(R.id.eT_Email);
@@ -113,6 +115,11 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         medium_windows = findViewById(R.id.eT_mWindows);
         large_windows = findViewById(R.id.eT_lWindows);
         saveQuote = findViewById(R.id.btn_SaveQuote);
+
+        basement = new Floors(0,0,0);
+        one = new Floors(0,0,0);
+        two = new Floors(0,0,0);
+        commercial = new Floors(0,0,0);
 
         /* Todo DON'T FORGET ABOUT THIS */
         floorsList = new ArrayList<Floors>();
@@ -416,12 +423,16 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     }
 
     // TODO: This is what we need to get done next
-    public void CalculatePrice() {
+    public void CalculatePrice(View view) {
         Customer customer = new Customer(location, eT_name.toString(), eT_phone_number.toString(), eT_email.toString());
         WindowDetails windowDetails = new WindowDetails(floorsList);
         quote = new Quote(date, customer, windowDetails);
         boolean isCommercial = floorsSpinner.getSelectedItem().toString().equalsIgnoreCase("Commercial");
         quoteAmount = quote.calculateAmount(isCommercial);
+
+        totalPrice.setText("Total Price: $ " + quoteAmount);
+
+        Toast.makeText(this, "Price Calculated", Toast.LENGTH_LONG);
 
     }
 

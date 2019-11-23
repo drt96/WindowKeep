@@ -7,14 +7,14 @@
     tools:context=".CreateQuote_View">
 
     <TextView
-        android:id="@+id/tV_TotalWindows"
+        android:id="@+id/tV_TotalPrice"
         android:layout_width="350dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="cursive"
-        android:text="Total Number of Windows:"
+        android:text="Total Price: $ 0.00"
         android:textAlignment="viewStart"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -35,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_CalcPrice"
-        app:layout_constraintTop_toBottomOf="@+id/tV_TotalWindows"
+        app:layout_constraintTop_toBottomOf="@+id/tV_TotalPrice"
         app:layout_constraintVertical_bias="0.506" />
 
     <TextView
@@ -327,7 +327,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_CalcPrice"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tV_TotalWindows"
+        app:layout_constraintTop_toBottomOf="@+id/tV_TotalPrice"
         app:layout_constraintVertical_bias="0.506" />
 
     <Button
@@ -336,12 +336,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
+        android:onClick="CalculatePrice"
         android:text="Caculate Price"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_SaveQuote"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_SelectDate"
-        app:layout_constraintTop_toBottomOf="@+id/tV_TotalWindows"
+        app:layout_constraintTop_toBottomOf="@+id/tV_TotalPrice"
         app:layout_constraintVertical_bias="0.506" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
