@@ -30,7 +30,7 @@ import java.util.List;
 
 /* View and Presenter for creating a quote */
 @SuppressLint("ParcelCreator")
-public class CreateQuote_View extends AppCompatActivity implements AdapterView.OnItemSelectedListener, Parcelable {
+public class CreateQuote_View extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     /* Create FirebaseDatabase variable */
     private FirebaseDatabase database;
@@ -38,7 +38,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     /* Create calls variables from Activity UI. Using "location" for address ET field */
     private Button saveQuote;
     private EditText eT_name, eT_address, eT_email, eT_phone_number, small_windows, medium_windows, large_windows;
-    private TextView quoteDate, totalPrice;
+    private TextView quoteDate, totalPrice, aptDate;
     private static String name, address, email, phone_number;
 
     /* Variables for the small, medium, and large number of windows that change when you select a new spinner option */
@@ -58,26 +58,6 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
     public CreateQuote_View() {
     }
-
-    /*
-     This is the Create_View constructor for the Location
-     class Parcel.
-    */
-    protected CreateQuote_View(Parcel in) {
-        quoteAmount = in.readDouble();
-    }
-
-    public static final Creator<CreateQuote_View> CREATOR = new Creator<CreateQuote_View>() {
-        @Override
-        public CreateQuote_View createFromParcel(Parcel in) {
-            return new CreateQuote_View(in);
-        }
-
-        @Override
-        public CreateQuote_View[] newArray(int size) {
-            return new CreateQuote_View[size];
-        }
-    };
 
     /* Initialize data */
     public static void resetQuoteFields() {
@@ -106,7 +86,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
         /* Get class variables */
         quoteDate = findViewById(R.id.tV_CurrentDate);
-        totalPrice = findViewById(R.id.tV_TotalPrice);
+        totalPrice = findViewById(R.id.tV_totalPrice);
         eT_name = findViewById(R.id.eT_Name);
         eT_address = findViewById(R.id.eTM_Address);
         eT_email = findViewById(R.id.eT_Email);
@@ -115,6 +95,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         medium_windows = findViewById(R.id.eT_mWindows);
         large_windows = findViewById(R.id.eT_lWindows);
         saveQuote = findViewById(R.id.btn_SaveQuote);
+        aptDate = findViewById(R.id.tV_aptDate);
 
         basement = new Floors(0,0,0);
         one = new Floors(0,0,0);
@@ -135,9 +116,9 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
          Just some error checking to make sure the location is correct
         */
         Intent incomingIntent = getIntent();
-        if (    incomingIntent.getExtras().getDouble("longitude") != 0 &&
-                incomingIntent.getExtras().getDouble("latitude") != 0) {
-            Bundle extras = incomingIntent.getExtras();
+        Bundle extras = incomingIntent.getExtras();
+
+        if (    extras.containsKey("latitude")) {
             location = new Location(extras.getDouble("latitude"), extras.getDouble("longitude"));
             latitude = location.getLatitude();
             longitude = location.getLongitude();
@@ -145,7 +126,13 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         }
         else {
             location = new Location(latitude, longitude);
-            Log.i("loc", location.getLatitude() + " " + location.getLongitude());
+        }
+
+
+        if (extras.containsKey("month")) {
+            Log.i("loc", "" + extras.getString("time"));
+            String dateString = ("Apt Date: " + extras.getInt("month") + "/" + extras.getInt("day") + "/" + extras.getInt("year") + " - " + extras.getString("time"));
+            aptDate.setText(dateString);
         }
 
         /* Initialize FirebaseDatabase with Instance */
@@ -467,16 +454,5 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         myReference.child("Quote Data").push().setValue(customer);
         finish();
 
-    }
-
-    /* Abstract for parcelable */
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeDouble(quoteAmount);
     }
 }

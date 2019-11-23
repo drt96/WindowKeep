@@ -7,11 +7,26 @@
     tools:context=".CreateQuote_View">
 
     <TextView
-        android:id="@+id/tV_TotalPrice"
+        android:id="@+id/tV_aptDate"
+        android:layout_width="227dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Apt Date: None Selected"
+        android:textAlignment="center"
+        android:textColor="#009688"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/tV_Quote"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tV_totalPrice"
         android:layout_width="350dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="cursive"
         android:text="Total Price: $ 0.00"
@@ -19,7 +34,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tV_NumLWindows" />
 
@@ -27,16 +42,15 @@
         android:id="@+id/btn_SaveQuote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="74dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="72dp"
         android:text="Save Quote"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_CalcPrice"
-        app:layout_constraintTop_toBottomOf="@+id/tV_TotalPrice"
-        app:layout_constraintVertical_bias="0.506" />
+        app:layout_constraintTop_toBottomOf="@+id/tV_totalPrice" />
 
     <TextView
         android:id="@+id/tV_NumLWindows"
@@ -149,8 +163,8 @@
 
     <TextView
         android:id="@+id/tV_Quote"
-        android:layout_width="190dp"
-        android:layout_height="50dp"
+        android:layout_width="151dp"
+        android:layout_height="41dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="cursive"
@@ -165,19 +179,16 @@
 
     <TextView
         android:id="@+id/tV_CurrentDate"
-        android:layout_width="180dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="228dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="sans-serif-medium"
         android:text="Date:"
-        android:textAlignment="viewStart"
+        android:textAlignment="center"
         android:textColor="#009688"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tV_Quote"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -327,7 +338,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_CalcPrice"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tV_TotalPrice"
+        app:layout_constraintTop_toBottomOf="@+id/tV_totalPrice"
         app:layout_constraintVertical_bias="0.506" />
 
     <Button
@@ -342,7 +353,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_SaveQuote"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_SelectDate"
-        app:layout_constraintTop_toBottomOf="@+id/tV_TotalPrice"
+        app:layout_constraintTop_toBottomOf="@+id/tV_totalPrice"
         app:layout_constraintVertical_bias="0.506" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
