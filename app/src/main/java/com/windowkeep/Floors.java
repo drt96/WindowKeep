@@ -43,6 +43,6 @@ public class Floors {
         return "Floor" +
                 "\n# small: " + small +
                 "\n# medium: " + medium +
-                "\n# large: " + large + ";\n";
+                "\n# large: " + large;
     }
 }

@@ -409,7 +409,6 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         startActivity(intent);
     }
 
-    // TODO: This is what we need to get done next
     public void CalculatePrice(View view) {
         Customer customer = new Customer(location, eT_name.toString(), eT_phone_number.toString(), eT_email.toString());
         WindowDetails windowDetails = new WindowDetails(floorsList);
@@ -420,7 +419,6 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         totalPrice.setText("Total Price: $ " + quoteAmount);
 
         Toast.makeText(this, "Price Calculated", Toast.LENGTH_LONG);
-
     }
 
     /* TODO: I think we could use this throughout, get rid of the date class and instead just member data: String Date */
