@@ -37,7 +37,6 @@ public class Customer {
         this.email = email;
     }
 
-
     /* Getters and Setters */
     public Location getLocation() {
         return location;

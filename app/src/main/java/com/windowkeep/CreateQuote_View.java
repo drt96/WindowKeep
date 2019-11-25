@@ -97,10 +97,10 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         saveQuote = findViewById(R.id.btn_SaveQuote);
         aptDate = findViewById(R.id.tV_aptDate);
 
-        basement = new Floors(0,0,0);
-        one = new Floors(0,0,0);
-        two = new Floors(0,0,0);
-        commercial = new Floors(0,0,0);
+        basement = new Floors(0, 0, 0);
+        one = new Floors(0, 0, 0);
+        two = new Floors(0, 0, 0);
+        commercial = new Floors(0, 0, 0);
 
         /* Todo DON'T FORGET ABOUT THIS */
         floorsList = new ArrayList<Floors>();
@@ -118,13 +118,12 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         Intent incomingIntent = getIntent();
         Bundle extras = incomingIntent.getExtras();
 
-        if (    extras.containsKey("latitude")) {
+        if (extras.containsKey("latitude")) {
             location = new Location(extras.getDouble("latitude"), extras.getDouble("longitude"));
             latitude = location.getLatitude();
             longitude = location.getLongitude();
             Log.i("loc", location.getLatitude() + " " + location.getLongitude());
-        }
-        else {
+        } else {
             location = new Location(latitude, longitude);
         }
 
