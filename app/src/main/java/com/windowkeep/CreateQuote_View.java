@@ -39,7 +39,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     private Button saveQuote;
     private EditText eT_name, eT_address, eT_email, eT_phone_number, small_windows, medium_windows, large_windows;
     private TextView quoteDate, totalPrice, aptDate;
-    private static String name, address, email, phone_number;
+    private static String name, address, email, phone_number, price;
 
     /* Variables for the small, medium, and large number of windows that change when you select a new spinner option */
     private static int bS, bM, bL, oneS, oneM, oneL, twoS, twoM, twoL, comS, comM, comL;
@@ -52,9 +52,8 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     private List<Floors> floorsList;
 
     private Quote quote;
-    private double quoteAmount;
-
-    private String date;
+    private static double quoteAmount;
+    private static String m_date;
 
     public CreateQuote_View() {
     }
@@ -77,6 +76,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         address = "";
         phone_number = "";
         email = "";
+        price = "";
     }
 
     @Override
@@ -102,7 +102,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         two = new Floors(0, 0, 0);
         commercial = new Floors(0, 0, 0);
 
-        /* Todo DON'T FORGET ABOUT THIS */
+        /* DON'T FORGET ABOUT THIS */
         floorsList = new ArrayList<Floors>();
         floorsList.add(basement);
         floorsList.add(one);
@@ -126,7 +126,6 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         } else {
             location = new Location(latitude, longitude);
         }
-
 
         if (extras.containsKey("month")) {
             Log.i("loc", "" + extras.getString("time"));
@@ -173,6 +172,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
                 address = eT_address.getText().toString();
                 email = eT_email.getText().toString();
                 phone_number = eT_phone_number.getText().toString();
+                price = totalPrice.getText().toString();
             }
         };
 
@@ -411,21 +411,20 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     public void CalculatePrice(View view) {
         Customer customer = new Customer(location, eT_name.toString(), eT_phone_number.toString(), eT_email.toString());
         WindowDetails windowDetails = new WindowDetails(floorsList);
-        quote = new Quote(date, customer, windowDetails);
+        quote = new Quote(m_date, customer, windowDetails);
         boolean isCommercial = floorsSpinner.getSelectedItem().toString().equalsIgnoreCase("Commercial");
         quoteAmount = quote.calculateAmount(isCommercial);
-
         totalPrice.setText("Total Price: $ " + quoteAmount);
 
-        Toast.makeText(this, "Price Calculated", Toast.LENGTH_LONG);
+        Toast.makeText(this, "Price Calculated", Toast.LENGTH_LONG).show();
     }
 
-    /* TODO: I think we could use this throughout, get rid of the date class and instead just member data: String Date */
     public void setTodaysDate() {
         java.util.Date date = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy '-' HH:mm z");
         String formattedDate = df.format(date);
-        quoteDate.setText("Date: " + formattedDate);
+        m_date = date.toString();
+        quoteDate.setText("Quote Date: " + formattedDate);
     }
 
     public void fillTextFields() {

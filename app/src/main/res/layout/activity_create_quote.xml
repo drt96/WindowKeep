@@ -8,18 +8,20 @@
 
     <TextView
         android:id="@+id/tV_aptDate"
-        android:layout_width="227dp"
-        android:layout_height="23dp"
+        android:layout_width="250dp"
+        android:layout_height="24dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:fontFamily="sans-serif-medium"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="sans-serif-thin"
         android:text="Apt Date: None Selected"
         android:textAlignment="center"
-        android:textColor="#009688"
+        android:textColor="#FF5722"
         android:textSize="14sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tV_Quote"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tV_CurrentDate" />
 
     <TextView
         android:id="@+id/tV_totalPrice"
@@ -42,15 +44,16 @@
         android:id="@+id/btn_SaveQuote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="74dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="16dp"
         android:text="Save Quote"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_CalcPrice"
-        app:layout_constraintTop_toBottomOf="@+id/tV_totalPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/tV_totalPrice"
+        app:layout_constraintVertical_bias="0.51" />
 
     <TextView
         android:id="@+id/tV_NumLWindows"
@@ -126,7 +129,7 @@
         android:id="@+id/tV_Phone"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="sans-serif-medium"
         android:text="Phone Number:"
@@ -139,7 +142,7 @@
         android:id="@+id/tV_Email"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="sans-serif-medium"
         android:text="Email:"
@@ -152,7 +155,7 @@
         android:id="@+id/tV_Address"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="sans-serif-medium"
         android:text="Address:"
@@ -163,9 +166,9 @@
 
     <TextView
         android:id="@+id/tV_Quote"
-        android:layout_width="151dp"
+        android:layout_width="120dp"
         android:layout_height="41dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:fontFamily="cursive"
         android:text="Quote"
@@ -179,16 +182,19 @@
 
     <TextView
         android:id="@+id/tV_CurrentDate"
-        android:layout_width="228dp"
-        android:layout_height="23dp"
+        android:layout_width="250dp"
+        android:layout_height="24dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Date:"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="Quote Date:"
         android:textAlignment="center"
-        android:textColor="#009688"
+        android:textColor="#FF5722"
         android:textSize="14sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toEndOf="@+id/tV_Quote"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -196,7 +202,7 @@
         android:id="@+id/tV_Name"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-medium"
         android:text="Customer Name:"
@@ -215,7 +221,7 @@
         android:id="@+id/tV_NumFloors"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:fontFamily="sans-serif-medium"
         android:text="Number of floors:"
@@ -232,7 +238,7 @@
         android:layout_marginEnd="16dp"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toEndOf="@+id/tV_NumFloors"
         app:layout_constraintTop_toBottomOf="@+id/tV_Phone" />
 
@@ -250,7 +256,6 @@
         android:textAlignment="viewStart"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tV_Name"
         app:layout_constraintTop_toBottomOf="@+id/tV_Quote" />
 
@@ -269,7 +274,7 @@
         android:textAlignment="viewStart"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toEndOf="@+id/tV_Address"
         app:layout_constraintTop_toBottomOf="@+id/eT_Name" />
 
@@ -287,7 +292,7 @@
         android:textAlignment="viewStart"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toEndOf="@+id/tV_Email"
         app:layout_constraintTop_toBottomOf="@+id/eTM_Address" />
 
@@ -305,7 +310,7 @@
         android:textAlignment="viewStart"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.238"
         app:layout_constraintStart_toEndOf="@+id/tV_Phone"
         app:layout_constraintTop_toBottomOf="@+id/eT_Email" />
 
@@ -333,7 +338,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:onClick="openCalendar"
         android:text="Select Date"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -348,7 +353,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:onClick="CalculatePrice"
         android:text="Caculate Price"
         app:layout_constraintBottom_toBottomOf="parent"

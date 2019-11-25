@@ -56,19 +56,17 @@ public class SelectDate_View extends AppCompatActivity implements AdapterView.On
         minutesSpinner.setOnItemSelectedListener(this);
     }
 
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
     }
-
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
 
-
+    /* Once a data is selected it the user will be able to confirm that data and have it show up in a calendar */
     public void confirmDate(View view) {
         Spinner hourSpinner = findViewById(R.id.hour_spinner);
         Spinner minutesSpinner = findViewById(R.id.minutes_spinner);
@@ -83,7 +81,7 @@ public class SelectDate_View extends AppCompatActivity implements AdapterView.On
         extras.putInt("month", dateMonth);
         extras.putInt("day", dateDay);
         extras.putInt("year", dateYear);
-        extras.putString("time", dateTime);
+        extras.putString("time", dateTime + " MST");
 
         intent.putExtras(extras);
         startActivity(intent);
