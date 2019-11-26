@@ -27,5 +27,6 @@
         <item>2</item>
         <item>Commercial</item>
     </string-array>
+    <string name="title_activity_map">Map</string>
 
 </resources>
