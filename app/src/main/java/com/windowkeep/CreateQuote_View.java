@@ -110,6 +110,14 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
         fillTextFields();
 
+        /* Creating onClickListener for "Save Quote" button */
+        saveQuote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveToFB();
+            }
+        });
+
         /*
          Sets the location of the current quote and keeps it consistent as we change to and from the selectDate view.
          Just some error checking to make sure the location is correct
@@ -399,14 +407,23 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         startActivity(intent);
     }
 
-    public void CalculatePrice(View view) {
-        Customer customer = new Customer(location, eT_name.toString(), eT_phone_number.toString(), eT_email.toString());
+    /* Just abstracting the repetitive work for calculating a quote because it happens for more than one button click */
+    private void initializeQuote()
+    {
+        Customer customer = new Customer(location,
+                eT_name.getText().toString(),
+                eT_phone_number.getText().toString(),
+                eT_email.getText().toString());
         WindowDetails windowDetails = new WindowDetails(floorsList);
         quote = new Quote(m_date, customer, windowDetails);
         boolean isCommercial = floorsSpinner.getSelectedItem().toString().equalsIgnoreCase("Commercial");
-        quoteAmount = quote.calculateAmount(isCommercial);
-        totalPrice.setText("Total Price: $ " + quoteAmount);
+        quote.calculateAmount(isCommercial);
+    }
 
+    public void CalculatePrice(View view) {
+        initializeQuote();
+        quoteAmount = quote.getAmount();
+        totalPrice.setText("Total Price: $ " + quoteAmount);
         Toast.makeText(this, "Price Calculated", Toast.LENGTH_LONG).show();
     }
 
@@ -425,21 +442,21 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         eT_address.setText(address);
     }
 
+
     /* Method for saving quote data to Firebase Database */
-    private void saveToFB(View view) {
-        /*
+    private void saveToFB() {
+        /* SORRY I (DANIEL) CHANGED IT A BIT
          Create the new customer passing in values from activity.
          We don't need getText and toString for location because
          we're passing the Location class to the Customer class
          via Parcelable
         */
-        Customer customer = new Customer(location, eT_name.getText().toString(), eT_phone_number.getText().toString()
-                , eT_email.getText().toString());
+        initializeQuote();
 
-        /* Initialize the database reference based off of the Firebase vaiable above */
+        /* Initialize the database reference based off of the Firebase variable above */
         DatabaseReference myReference = database.getReference();
-        myReference.child("Quote Data").push().setValue(customer);
+        myReference.child("Quote Data").push().setValue(quote);
+        Toast.makeText(this, "Saved to Database", Toast.LENGTH_LONG).show();
         finish();
-
     }
 }

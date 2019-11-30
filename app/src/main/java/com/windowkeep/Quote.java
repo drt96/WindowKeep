@@ -100,7 +100,7 @@ public class Quote {
 
     /* Use window details to calculate the quote double amount
      * It's ugly but it should work. I was too lazy to solve it in a loop*/
-    public double calculateAmount(boolean isCommercial) {
+    public void calculateAmount(boolean isCommercial) {
         double calcAmount = 0;
         Floors temp;
         int i = 3; /* Commercial Client */
@@ -127,7 +127,7 @@ public class Quote {
                     (m0 * temp.getMedium()) +
                     (l0 * temp.getLarge());
         }
-        return calcAmount;
+        amount = calcAmount;
     }
 
 
