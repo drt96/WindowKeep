@@ -28,7 +28,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCB_O-IIg7oexro948o8djSN8HxzHCYGS8" />
+            android:value="AIzaSyC7bvCB_OYUFgv8AgQ6CtpPdb4FncFv4E4" />
 
         <activity android:name=".SelectDate_View" />
         <activity android:name=".CreateQuote_View" />
