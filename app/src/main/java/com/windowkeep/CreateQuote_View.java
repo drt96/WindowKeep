@@ -39,7 +39,10 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     private Button saveQuote;
     private EditText eT_name, eT_address, eT_email, eT_phone_number, small_windows, medium_windows, large_windows;
     private TextView quoteDate, totalPrice, aptDate;
-    private static String name, address, email, phone_number, price;
+    private static String name, address, email, phone_number, m_date, price;
+
+    private Quote quote;
+    private static double quoteAmount;
 
     /* Variables for the small, medium, and large number of windows that change when you select a new spinner option */
     private static int bS, bM, bL, oneS, oneM, oneL, twoS, twoM, twoL, comS, comM, comL;
@@ -50,10 +53,6 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     /* Member data used to populate the windowDetails class for each quote */
     private Floors basement, one, two, commercial;
     private List<Floors> floorsList;
-
-    private Quote quote;
-    private static double quoteAmount;
-    private static String m_date;
 
     public CreateQuote_View() {
     }
@@ -136,14 +135,6 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         /* Initialize FirebaseDatabase with Instance */
         database = FirebaseDatabase.getInstance();
 
-        /* Creating onClickListener for "Save Quote" button */
-        saveQuote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveToFB();
-            }
-        });
-
         /* Setting up the spinner for selecting which floor to input a number of windows on */
         floorsSpinner = findViewById(R.id.s_floors);
         ArrayAdapter<CharSequence> floorAdapter = ArrayAdapter.createFromResource(this, R.array.numFloors, android.R.layout.simple_spinner_item);
@@ -152,7 +143,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         floorsSpinner.setOnItemSelectedListener(this);
 
         /*
-         Textwatcher for the text fields at the top (name, email, etc). This will save the info
+         Text Watcher for the text fields at the top (name, email, etc). This will save the info
          put in the fields and repopulate the text boxes when we leave the view and come back to it.
          Without this, the fields will be blank when we leave the view and return to it (IE when we select a
          date from the calendar and then return to the createQuoteView)
@@ -435,7 +426,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     }
 
     /* Method for saving quote data to Firebase Database */
-    private void saveToFB() {
+    private void saveToFB(View view) {
         /*
          Create the new customer passing in values from activity.
          We don't need getText and toString for location because
