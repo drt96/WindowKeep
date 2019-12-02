@@ -38,7 +38,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     /* Create calls variables from Activity UI. Using "location" for address ET field */
     private Button saveQuote;
     private EditText eT_name, eT_address, eT_email, eT_phone_number, small_windows, medium_windows, large_windows;
-    private TextView quoteDate, totalPrice, aptDate;
+    private TextView quoteDate, totalPrice, aptDate, latLongLocation;
     private static String name, address, email, phone_number, m_date, price;
 
     private Quote quote;
@@ -95,6 +95,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         large_windows = findViewById(R.id.eT_lWindows);
         saveQuote = findViewById(R.id.btn_SaveQuote);
         aptDate = findViewById(R.id.tV_aptDate);
+        latLongLocation = findViewById(R.id.tV_Location);
 
         basement = new Floors(0, 0, 0);
         one = new Floors(0, 0, 0);
@@ -133,6 +134,8 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         } else {
             location = new Location(latitude, longitude);
         }
+
+        latLongLocation.setText(location.toString());
 
         if (extras.containsKey("month")) {
             Log.i("loc", "" + extras.getString("time"));
@@ -452,6 +455,8 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
          via Parcelable
         */
         initializeQuote();
+
+        // TODO LOOK AT WISHLIST FOR FIREBASE AWESOMENESS
 
         /* Initialize the database reference based off of the Firebase variable above */
         DatabaseReference myReference = database.getReference();

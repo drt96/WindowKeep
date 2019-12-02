@@ -33,8 +33,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker mBenson;
     private Marker mAustin;
 
-    @Override
+   private Location location;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -43,6 +44,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        /* Initializing the data */
+        location = new Location(STC.latitude, STC.longitude);
         /*
         Create the on click listener and create the create quote activity
         quoteButton = findViewById(R.id.quoteButton);
@@ -55,7 +58,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void openQuoteView(View view) {
         /* Hardcoded location for testing purposes. We will want to change the hardcoded 43, 111 values to whatever the location of the pin is */
         Intent intent = new Intent(this, CreateQuote_View.class);
-        Location location = new Location(43, 111);
         Bundle extras = new Bundle();
 
         extras.putDouble("latitude", location.getLatitude());
@@ -107,6 +109,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                  */
                 Toast.makeText(getApplicationContext(), latLng.toString(),
                         Toast.LENGTH_LONG).show();
+                location = new Location(latLng.latitude, latLng.longitude);
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.title("Location: " + latLng.latitude + ":" + latLng.longitude);
                 markerOptions.position(latLng);
