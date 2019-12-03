@@ -70,7 +70,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     /* Activity for calender view */
     public void openCalenderView(View view) {
-        Intent intent = new Intent(this, SelectDate_View.class);
+        Intent intent = new Intent(this, AppointmentList_View.class);
         startActivity(intent);
     }
 
