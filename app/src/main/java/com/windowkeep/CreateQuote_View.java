@@ -140,9 +140,9 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
         if (extras.containsKey("month")) {
             Log.i("loc", "" + extras.getString("time"));
-            String dateString = ("Apt Date: " + extras.getInt("month") + "/" + extras.getInt("day") + "/" + extras.getInt("year") + " - " + extras.getString("time"));
-            aptDate.setText(dateString);
+            String dateString = (extras.getInt("month") + "/" + extras.getInt("day") + "/" + extras.getInt("year"));
             a_date = dateString;
+            aptDate.setText("Apt Date: " + dateString + " - " + extras.getString("time"));
         }
 
         /* Initialize FirebaseDatabase with Instance */
