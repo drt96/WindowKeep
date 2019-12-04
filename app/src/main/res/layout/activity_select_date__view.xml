@@ -10,17 +10,16 @@
         android:id="@+id/calendarView"
         android:layout_width="376dp"
         android:layout_height="310dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_Header" />
 
     <TextView
         android:id="@+id/t_selectedDate"
         android:layout_width="360dp"
         android:layout_height="40dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-light"
         android:text="No Date Selected"
         android:textAlignment="center"
@@ -46,10 +45,12 @@
         android:id="@+id/hour_spinner"
         android:layout_width="130dp"
         android:layout_height="45dp"
+        app:layout_constraintBottom_toTopOf="@+id/b_confirmDate"
         app:layout_constraintEnd_toStartOf="@+id/minutes_spinner"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tV_Hour" />
+        app:layout_constraintTop_toBottomOf="@+id/tV_Hour"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
         android:id="@+id/minutes_spinner"
@@ -89,5 +90,22 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tV_Hour"
         app:layout_constraintTop_toBottomOf="@+id/t_selectedDate" />
+
+    <TextView
+        android:id="@+id/tv_Header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="cursive"
+        android:text="Calender"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FF5722"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/calendarView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
