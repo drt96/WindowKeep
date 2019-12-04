@@ -7,31 +7,40 @@ android:layout_height="match_parent"
 tools:context=".MainActivity">
 
 
-<Button
-    android:id="@+id/CalenderButton"
-    android:layout_width="150dp"
-    android:layout_height="48dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginBottom="8dp"
-    android:onClick="openCalenderView"
-    android:text="Open Calender"
-    android:visibility="visible"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    tools:visibility="visible" />
+    <Button
+        android:id="@+id/CalenderButton"
+        android:layout_width="170dp"
+        android:layout_height="65dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="none"
+        android:onClick="openCalenderView"
+        android:text="Show Appointments"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#009688"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible" />
 
-<Button
-    android:id="@+id/quoteButton"
-    android:layout_width="150dp"
-    android:layout_height="48dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginBottom="8dp"
-    android:onClick="openQuoteView"
-    android:text="Create Quote"
-    android:visibility="visible"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    tools:visibility="visible" />
+    <Button
+        android:id="@+id/quoteButton"
+        android:layout_width="170dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="openQuoteView"
+        android:text="Create A Quote"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#009688"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
 
     <fragment
         android:id="@+id/map"
@@ -45,6 +54,20 @@ tools:context=".MainActivity">
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".MainActivity" />
+
+    <TextView
+        android:id="@+id/tV_Header"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:fontFamily="cursive"
+        android:text="WindowKeep by DDAT"
+        android:textAlignment="center"
+        android:textColor="#E91E63"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
