@@ -39,7 +39,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     private Button saveQuote;
     private EditText eT_name, eT_address, eT_email, eT_phone_number, small_windows, medium_windows, large_windows;
     private TextView quoteDate, totalPrice, aptDate, latLongLocation;
-    private static String name, address, email, phone_number, m_date, price;
+    private static String name, address, email, phone_number, m_date, a_date, price;
 
     private Quote quote;
     private static double quoteAmount;
@@ -48,7 +48,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     private static int bS, bM, bL, oneS, oneM, oneL, twoS, twoM, twoL, comS, comM, comL;
     private Spinner floorsSpinner;
     private static double latitude, longitude;
-    private ID id;
+    private Location location;
 
     /* Member data used to populate the windowDetails class for each quote */
     private Floors basement, one, two, commercial;
@@ -76,6 +76,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         phone_number = "";
         email = "";
         price = "";
+        a_date = "DATE DATE DATE";
     }
 
     @Override
@@ -85,6 +86,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
         /* Get class variables */
         quoteDate = findViewById(R.id.tV_CurrentDate);
+        aptDate = findViewById(R.id.tV_aptDate);
         totalPrice = findViewById(R.id.tV_totalPrice);
         eT_name = findViewById(R.id.eT_Name);
         eT_address = findViewById(R.id.eTM_Address);
@@ -94,7 +96,6 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         medium_windows = findViewById(R.id.eT_mWindows);
         large_windows = findViewById(R.id.eT_lWindows);
         saveQuote = findViewById(R.id.btn_SaveQuote);
-        aptDate = findViewById(R.id.tV_aptDate);
         latLongLocation = findViewById(R.id.tV_Location);
 
         basement = new Floors(0, 0, 0);
@@ -127,20 +128,21 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         Bundle extras = incomingIntent.getExtras();
 
         if (extras.containsKey("latitude")) {
-            id = new ID(extras.getDouble("latitude"), extras.getDouble("longitude"));
-            latitude = id.getLatitude();
-            longitude = id.getLongitude();
-            Log.i("loc", id.getLatitude() + " " + id.getLongitude());
+            location = new Location(extras.getDouble("latitude"), extras.getDouble("longitude"));
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+            Log.i("loc", location.getLatitude() + " " + location.getLongitude());
         } else {
-            id = new ID(latitude, longitude);
+            location = new Location(latitude, longitude);
         }
 
-        latLongLocation.setText(id.toString());
+        latLongLocation.setText(location.toString());
 
         if (extras.containsKey("month")) {
             Log.i("loc", "" + extras.getString("time"));
-            String dateString = ("Apt Date: " + extras.getInt("month") + "/" + extras.getInt("day") + "/" + extras.getInt("year") + " - " + extras.getString("time"));
-            aptDate.setText(dateString);
+            String dateString = (extras.getInt("month") + "/" + extras.getInt("day") + "/" + extras.getInt("year"));
+            a_date = dateString;
+            aptDate.setText("Apt Date: " + dateString + " - " + extras.getString("time"));
         }
 
         /* Initialize FirebaseDatabase with Instance */
@@ -411,14 +413,21 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     }
 
     /* Just abstracting the repetitive work for calculating a quote because it happens for more than one button click */
-    private void initializeQuote()
-    {
-        Customer customer = new Customer(id,
+    private void initializeQuote() {
+        Customer customer = new Customer(location,
                 eT_name.getText().toString(),
                 eT_phone_number.getText().toString(),
                 eT_email.getText().toString());
         WindowDetails windowDetails = new WindowDetails(floorsList);
-        quote = new Quote(m_date, customer, windowDetails);
+        if (!a_date.isEmpty()) {
+            quote = new Quote(m_date, customer, windowDetails);
+            System.out.println("This totally worked.");
+        } else {
+        }
+
+        quote = new Quote(m_date, a_date, customer, windowDetails);
+
+
         boolean isCommercial = floorsSpinner.getSelectedItem().toString().equalsIgnoreCase("Commercial");
         quote.calculateAmount(isCommercial);
     }
