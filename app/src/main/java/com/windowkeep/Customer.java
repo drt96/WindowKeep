@@ -6,7 +6,7 @@ import android.widget.EditText;
     Handles the logic to make and use Customers
  */
 public class Customer {
-    private Location location;
+    private ID id;
     private String name;
     private String phoneNumber;
     private String email;
@@ -18,32 +18,32 @@ public class Customer {
     */
 
     /* Default for create quote activity */
-    public Customer(Location location) {
-        this.location = location;
+    public Customer(ID id) {
+        this.id = id;
     }
 
     /* Default Constructor for appointment */
-    public Customer(Location location, String name, String email) {
-        this.location = location;
+    public Customer(ID id, String name, String email) {
+        this.id = id;
         this.name = name;
         this.email = email;
     }
 
     /* Constructor with all information if provided */
-    public Customer(Location location, String name, String phoneNumber, String email) {
-        this.location = location;
+    public Customer(ID id, String name, String phoneNumber, String email) {
+        this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
 
     /* Getters and Setters */
-    public Location getLocation() {
-        return location;
+    public ID getID() {
+        return id;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setID(ID id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -82,7 +82,7 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer" +
-                "\nLocation: " + location +
+                "\nLocation: " + id +
                 "\nName: " + name +
                 "\nPhoneNumber: " + phoneNumber +
                 "\nEmail: " + email +

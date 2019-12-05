@@ -39,7 +39,7 @@ public class Appointment {
     public String toString() {
         return "Appointment: " + appointmentDate
                 + "\n" + quote
-                + "\n" + "Location: " + quote.getCustomer().getLocation().toString();
+                + "\n" + "Location: " + quote.getCustomer().getID().toString();
     }
 }
 
