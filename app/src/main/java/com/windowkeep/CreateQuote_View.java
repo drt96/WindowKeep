@@ -48,7 +48,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     private static int bS, bM, bL, oneS, oneM, oneL, twoS, twoM, twoL, comS, comM, comL;
     private Spinner floorsSpinner;
     private static double latitude, longitude;
-    private Location location;
+    private ID id;
 
     /* Member data used to populate the windowDetails class for each quote */
     private Floors basement, one, two, commercial;
@@ -128,15 +128,15 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         Bundle extras = incomingIntent.getExtras();
 
         if (extras.containsKey("latitude")) {
-            location = new Location(extras.getDouble("latitude"), extras.getDouble("longitude"));
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
-            Log.i("loc", location.getLatitude() + " " + location.getLongitude());
+            id = new ID(extras.getDouble("latitude"), extras.getDouble("longitude"));
+            latitude = id.getLatitude();
+            longitude = id.getLongitude();
+            Log.i("loc", id.getLatitude() + " " + id.getLongitude());
         } else {
-            location = new Location(latitude, longitude);
+            id = new ID(latitude, longitude);
         }
 
-        latLongLocation.setText(location.toString());
+        latLongLocation.setText(id.toString());
 
         if (extras.containsKey("month")) {
             Log.i("loc", "" + extras.getString("time"));
@@ -414,7 +414,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
     /* Just abstracting the repetitive work for calculating a quote because it happens for more than one button click */
     private void initializeQuote() {
-        Customer customer = new Customer(location,
+        Customer customer = new Customer(id,
                 eT_name.getText().toString(),
                 eT_phone_number.getText().toString(),
                 eT_email.getText().toString());
