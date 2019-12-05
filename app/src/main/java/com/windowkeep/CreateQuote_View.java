@@ -76,7 +76,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         phone_number = "";
         email = "";
         price = "";
-        a_date = "DATE DATE DATE";
+        a_date = "";
     }
 
     @Override
@@ -416,17 +416,16 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     private void initializeQuote() {
         Customer customer = new Customer(id,
                 eT_name.getText().toString(),
+                eT_address.getText().toString(),
                 eT_phone_number.getText().toString(),
                 eT_email.getText().toString());
         WindowDetails windowDetails = new WindowDetails(floorsList);
         if (!a_date.isEmpty()) {
-            quote = new Quote(m_date, customer, windowDetails);
+            quote = new Quote(m_date, a_date, customer, windowDetails);
             System.out.println("This totally worked.");
         } else {
+            quote = new Quote(m_date, customer, windowDetails);
         }
-
-        quote = new Quote(m_date, a_date, customer, windowDetails);
-
 
         boolean isCommercial = floorsSpinner.getSelectedItem().toString().equalsIgnoreCase("Commercial");
         quote.calculateAmount(isCommercial);

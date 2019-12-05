@@ -151,7 +151,8 @@ public class Quote {
     public String toString() {
         return "Quote:" +
                 /* Date, customer and WindowDetails has their own toString */
-                "\nQuote1 " + quoteDate + "\nQuote2 " + aptDate +
+                "\nQuote Date " + quoteDate +
+                "\nAppointment Date" + aptDate +
                 "\n" + customer +
                 "\nWindow Details: " + windowDetails +
                 "\n$ " + amount;

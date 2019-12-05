@@ -8,6 +8,7 @@ import android.widget.EditText;
 public class Customer {
     private ID id;
     private String name;
+    private String address;
     private String phoneNumber;
     private String email;
     private Description description;
@@ -30,9 +31,10 @@ public class Customer {
     }
 
     /* Constructor with all information if provided */
-    public Customer(ID id, String name, String phoneNumber, String email) {
+    public Customer(ID id, String name, String address, String phoneNumber, String email) {
         this.id = id;
         this.name = name;
+        this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
@@ -53,6 +55,10 @@ public class Customer {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getAddress() { return address; }
+
+    public void setAddress(String address) { this.address = address; }
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -84,6 +90,7 @@ public class Customer {
         return "Customer" +
                 "\nLocation: " + id +
                 "\nName: " + name +
+                "\nAddress: " + address +
                 "\nPhoneNumber: " + phoneNumber +
                 "\nEmail: " + email +
                 "\nDescription: " + description;
