@@ -34,6 +34,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private Boolean mLocationPermissionsGranted = false;
     private FusedLocationProviderClient mFusedLocationProviderClient;
+    private ID id;
+    private Marker marker;
     private static final String TAG = "MapActivity";
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -41,14 +43,14 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private static final float DEFAULT_ZOOM = 14f;
 
 
-    private static final LatLng STC = new LatLng(43.814588, -111.784767);
-    private static final LatLng Benson = new LatLng(43.815455, -111.783062);
-    private static final LatLng Austin = new LatLng(43.815703, -111.784499);
-    private Marker mSTC;
-    private Marker mBenson;
-    private Marker mAustin;
+//    private static final LatLng STC = new LatLng(43.814588, -111.784767);
+//    private static final LatLng Benson = new LatLng(43.815455, -111.783062);
+//    private static final LatLng Austin = new LatLng(43.815703, -111.784499);
+//    private Marker mSTC;
+//    private Marker mBenson;
+//    private Marker mAustin;
 
-    private ID id;
+
 
 
     @Override
@@ -60,7 +62,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         /* Initializing the data */
-        id = new ID(STC.latitude, STC.longitude);
+//        id = new ID(STC.latitude, STC.longitude);
 
     }
 
@@ -105,6 +107,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        //Zoom buttons- causes app to crash ?
+        //mMap.getUiSettings().setZoomControlsEnabled(true);
 
     }
 
@@ -158,7 +162,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap map) {
         mMap = map;
-        map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         if (mLocationPermissionsGranted) {
             getDeviceLocation();
@@ -173,24 +177,32 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
 
-        /* Add some markers to the map, and add a data object to each marker. */
-        mSTC = mMap.addMarker(new MarkerOptions()
-                .position(STC)
-                .title("STC"));
-        mSTC.setTag(0);
+//        /* Add some markers to the map, and add a data object to each marker. */
+//        mSTC = mMap.addMarker(new MarkerOptions()
+//                .position(STC)
+//                .title("STC"));
+//        mSTC.setTag(0);
+//
+//        mBenson = mMap.addMarker(new MarkerOptions()
+//                .position(Benson)
+//                .title("Benson"));
+//        mBenson.setTag(0);
+//
+//        mAustin = mMap.addMarker(new MarkerOptions()
+//                .position(Austin)
+//                .title("Austin"));
+//        mAustin.setTag(0);
 
-        mBenson = mMap.addMarker(new MarkerOptions()
-                .position(Benson)
-                .title("Benson"));
-        mBenson.setTag(0);
-
-        mAustin = mMap.addMarker(new MarkerOptions()
-                .position(Austin)
-                .title("Austin"));
-        mAustin.setTag(0);
 
         /* Set a listener for marker click. */
         mMap.setOnMarkerClickListener(this);
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                marker.remove();
+            }
+        });
 
         /* To listen action whenever we click on the map */
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -201,6 +213,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                  * LatLng:Class will give us selected position latitude and
                  * longitude values
                  */
+
                 Toast.makeText(getApplicationContext(), latLng.toString(),
                         Toast.LENGTH_LONG).show();
                 id = new ID(latLng.latitude, latLng.longitude);
@@ -217,10 +230,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public boolean onMarkerClick(final Marker marker) {
 
-        Toast.makeText(this,
-                marker.getTitle() +
-                        "location is Latitude: " + marker.getPosition().latitude + " Longitude: " + marker.getPosition().longitude,
-                Toast.LENGTH_LONG).show();
+            Toast.makeText(this,
+                    marker.getTitle() +
+                            "location is Latitude: " + marker.getPosition().latitude + " Longitude: " + marker.getPosition().longitude,
+                    Toast.LENGTH_LONG).show();
 
         return false;
     }
