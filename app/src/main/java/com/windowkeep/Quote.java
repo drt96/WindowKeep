@@ -164,6 +164,7 @@ public class Quote {
                 /* Date, customer and WindowDetails has their own toString */
                 "\nQuote Date " + quoteDate +
                 "\nAppointment Date" + aptDate +
+                "\nAppointment Time" + aptTime +
                 "\n" + customer +
                 "\nWindow Details: " + windowDetails +
                 "\n$ " + amount;
