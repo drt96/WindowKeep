@@ -231,8 +231,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public boolean onMarkerClick(final Marker marker) {
 
             Toast.makeText(this,
-                    marker.getTitle() +
-                            "location is Latitude: " + marker.getPosition().latitude + " Longitude: " + marker.getPosition().longitude,
+                            "Latitude: " + marker.getPosition().latitude + " Longitude: " + marker.getPosition().longitude,
                     Toast.LENGTH_LONG).show();
 
         return false;
