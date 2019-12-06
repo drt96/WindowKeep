@@ -50,6 +50,8 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     private static double latitude, longitude;
     private ID id;
 
+    private String aptTime;
+
     /* Member data used to populate the windowDetails class for each quote */
     private Floors basement, one, two, commercial;
     private List<Floors> floorsList;
@@ -142,6 +144,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
             Log.i("loc", "" + extras.getString("time"));
             String dateString = (extras.getInt("month") + "/" + extras.getInt("day") + "/" + extras.getInt("year"));
             a_date = dateString;
+            aptTime = extras.getString("time");
             aptDate.setText("Apt Date: " + dateString + " - " + extras.getString("time"));
         }
 
@@ -421,7 +424,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
                 eT_email.getText().toString());
         WindowDetails windowDetails = new WindowDetails(floorsList);
         if (!a_date.isEmpty()) {
-            quote = new Quote(m_date, a_date, customer, windowDetails);
+            quote = new Quote(m_date, a_date, aptTime, customer, quoteAmount, windowDetails);
             System.out.println("This totally worked.");
         } else {
             quote = new Quote(m_date, customer, windowDetails);
@@ -451,6 +454,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         eT_email.setText(email);
         eT_phone_number.setText(phone_number);
         eT_address.setText(address);
+        totalPrice.setText("Total Price: $" + quoteAmount);
     }
 
 

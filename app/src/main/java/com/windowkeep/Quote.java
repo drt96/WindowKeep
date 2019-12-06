@@ -50,6 +50,7 @@ public class Quote {
     /* Private Data */
     private String quoteDate;
     private String aptDate;
+    private String aptTime;
     private Customer customer;
     private WindowDetails windowDetails;
     private double amount;
@@ -65,11 +66,13 @@ public class Quote {
         this.windowDetails = windowDetails;
     }
 
-    public Quote(String quoteDate, String aptDate, Customer customer, WindowDetails windowDetails) {
+    public Quote(String quoteDate, String aptDate, String aptTime, Customer customer, double amount, WindowDetails windowDetails) {
         this.quoteDate = quoteDate;
         this.aptDate = aptDate;
         this.customer = customer;
+        this.aptTime = aptTime;
         this.windowDetails = windowDetails;
+        this.amount = amount;
     }
 
     /* Getters and Setters */
@@ -80,6 +83,14 @@ public class Quote {
 
     public void setAptDate(String aptDate) {
         this.aptDate = aptDate;
+    }
+
+    public String getAptTime() {
+        return aptTime;
+    }
+
+    public void setAptTime(String aptDate) {
+        this.aptTime = aptTime;
     }
 
     public String getQuoteDate() {
