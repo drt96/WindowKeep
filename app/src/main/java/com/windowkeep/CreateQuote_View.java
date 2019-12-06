@@ -39,7 +39,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     private Button saveQuote;
     private EditText eT_name, eT_address, eT_email, eT_phone_number, small_windows, medium_windows, large_windows;
     private TextView quoteDate, totalPrice, aptDate, latLongLocation;
-    private static String name, address, email, phone_number, m_date, a_date, price;
+    private static String name, address, email, phone_number, m_date, a_date, a_Time, price;
 
     private Quote quote;
     private static double quoteAmount;
@@ -49,8 +49,6 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     private Spinner floorsSpinner;
     private static double latitude, longitude;
     private ID id;
-
-    private String aptTime;
 
     /* Member data used to populate the windowDetails class for each quote */
     private Floors basement, one, two, commercial;
@@ -79,6 +77,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         email = "";
         price = "";
         a_date = "";
+        a_Time = "";
     }
 
     @Override
@@ -144,7 +143,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
             Log.i("loc", "" + extras.getString("time"));
             String dateString = (extras.getInt("month") + "/" + extras.getInt("day") + "/" + extras.getInt("year"));
             a_date = dateString;
-            aptTime = extras.getString("time");
+            a_Time = extras.getString("time");
             aptDate.setText("Apt Date: " + dateString + " - " + extras.getString("time"));
         }
 
@@ -424,8 +423,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
                 eT_email.getText().toString());
         WindowDetails windowDetails = new WindowDetails(floorsList);
         if (!a_date.isEmpty()) {
-            quote = new Quote(m_date, a_date, aptTime, customer, quoteAmount, windowDetails);
-            System.out.println("This totally worked.");
+            quote = new Quote(m_date, a_date, a_Time, customer, quoteAmount, windowDetails);
         } else {
             quote = new Quote(m_date, customer, windowDetails);
         }
@@ -456,7 +454,6 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         eT_address.setText(address);
         totalPrice.setText("Total Price: $" + quoteAmount);
     }
-
 
     /* Method for saving quote data to Firebase Database */
     private void saveToFB() {
