@@ -27,6 +27,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
@@ -35,22 +40,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private Boolean mLocationPermissionsGranted = false;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private ID id;
-    private Marker marker;
     private static final String TAG = "MapActivity";
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private static final float DEFAULT_ZOOM = 14f;
-
-
-//    private static final LatLng STC = new LatLng(43.814588, -111.784767);
-//    private static final LatLng Benson = new LatLng(43.815455, -111.783062);
-//    private static final LatLng Austin = new LatLng(43.815703, -111.784499);
-//    private Marker mSTC;
-//    private Marker mBenson;
-//    private Marker mAustin;
-
-
+    private static final float DEFAULT_ZOOM = 1f;
 
 
     @Override
@@ -58,11 +52,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getLocationPermission();
-
-
-
-        /* Initializing the data */
-//        id = new ID(STC.latitude, STC.longitude);
 
     }
 
@@ -177,22 +166,28 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
 
-//        /* Add some markers to the map, and add a data object to each marker. */
-//        mSTC = mMap.addMarker(new MarkerOptions()
-//                .position(STC)
-//                .title("STC"));
-//        mSTC.setTag(0);
-//
-//        mBenson = mMap.addMarker(new MarkerOptions()
-//                .position(Benson)
-//                .title("Benson"));
-//        mBenson.setTag(0);
-//
-//        mAustin = mMap.addMarker(new MarkerOptions()
-//                .position(Austin)
-//                .title("Austin"));
-//        mAustin.setTag(0);
+        /* Get the info from firebase then populate map with markers */
+        FirebaseDatabase.getInstance().getReference().child("Quote Data").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Quote quote = snapshot.getValue(Quote.class);
+                    double lat = quote.getCustomer().getID().getLatitude();
+                    double lon = quote.getCustomer().getID().getLongitude();
+                    Log.i("Location", "" + lat + " " + lon);
+                    LatLng latLng = new LatLng(lat, lon);
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.title(" Name: " + quote.getCustomer().getName() + " Address:" + quote.getCustomer().getAddress());
+                    markerOptions.position(latLng);
+                    mMap.addMarker(markerOptions);
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         /* Set a listener for marker click. */
         mMap.setOnMarkerClickListener(this);
