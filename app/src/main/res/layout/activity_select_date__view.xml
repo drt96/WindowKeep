@@ -8,18 +8,18 @@
 
     <CalendarView
         android:id="@+id/calendarView"
-        android:layout_width="376dp"
-        android:layout_height="310dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_Header" />
 
     <TextView
         android:id="@+id/t_selectedDate"
-        android:layout_width="360dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:fontFamily="sans-serif-light"
         android:text="No Date Selected"
         android:textAlignment="center"
@@ -31,11 +31,12 @@
 
     <Button
         android:id="@+id/b_confirmDate"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:onClick="confirmDate"
         android:text="Confirm Date"
+        android:textColor="#009688"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -43,69 +44,85 @@
 
     <Spinner
         android:id="@+id/hour_spinner"
-        android:layout_width="130dp"
-        android:layout_height="45dp"
-        app:layout_constraintBottom_toTopOf="@+id/b_confirmDate"
-        app:layout_constraintEnd_toStartOf="@+id/minutes_spinner"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tV_Hour"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toEndOf="@+id/tV_Hour"
+        app:layout_constraintTop_toBottomOf="@+id/t_selectedDate" />
 
     <Spinner
         android:id="@+id/minutes_spinner"
-        android:layout_width="130dp"
-        android:layout_height="45dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/hour_spinner"
-        app:layout_constraintTop_toBottomOf="@+id/tV_Minute" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toEndOf="@+id/tV_Minute"
+        app:layout_constraintTop_toBottomOf="@+id/tV_Hour" />
 
     <TextView
         android:id="@+id/tV_Hour"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
         android:layout_marginTop="32dp"
         android:fontFamily="sans-serif-black"
         android:text="Select Hour:"
         android:textAlignment="center"
         android:textSize="18sp"
         android:typeface="normal"
-        app:layout_constraintEnd_toStartOf="@+id/tV_Minute"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/t_selectedDate" />
 
     <TextView
         android:id="@+id/tV_Minute"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
         android:layout_marginTop="32dp"
         android:fontFamily="sans-serif-black"
         android:text="Select Minute:"
         android:textAlignment="center"
         android:textSize="18sp"
         android:typeface="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tV_Hour"
-        app:layout_constraintTop_toBottomOf="@+id/t_selectedDate" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tV_Hour" />
 
     <TextView
         android:id="@+id/tv_Header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="cursive"
         android:text="Calender"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#FF5722"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toTopOf="@+id/calendarView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.02" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.98" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

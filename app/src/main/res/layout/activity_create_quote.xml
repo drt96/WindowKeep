@@ -8,11 +8,9 @@
 
     <TextView
         android:id="@+id/tV_aptDate"
-        android:layout_width="250dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:fontFamily="sans-serif-thin"
         android:text="Apt Date: None Selected"
         android:textAlignment="center"
@@ -20,46 +18,55 @@
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tV_Quote"
         app:layout_constraintTop_toBottomOf="@+id/tV_CurrentDate" />
-
-    <TextView
-        android:id="@+id/tV_totalPrice"
-        android:layout_width="350dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="cursive"
-        android:text="Total Price: $ 0.00"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tV_NumLWindows" />
 
     <Button
         android:id="@+id/btn_SaveQuote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-
         android:text="Save Quote"
-        app:layout_constraintBottom_toTopOf="@+id/tV_Location"
+        android:textColor="#009688"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_CalcPrice"
-        app:layout_constraintTop_toBottomOf="@+id/tV_totalPrice"
-        app:layout_constraintVertical_bias="0.505" />
+        app:layout_constraintTop_toBottomOf="@+id/tV_totalPrice" />
+
+    <EditText
+        android:id="@+id/eT_lWindows"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-light"
+        android:hint="0"
+        android:inputType="number"
+        android:textAlignment="viewStart"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eT_mWindows" />
+
+    <TextView
+        android:id="@+id/tV_totalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="cursive"
+        android:text="Total Price: $ 0.00"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eT_lWindows" />
 
     <TextView
         android:id="@+id/tV_NumLWindows"
-        android:layout_width="200dp"
-        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="sans-serif-medium"
         android:text="Number of Large Windows:"
         android:textAlignment="center"
@@ -67,38 +74,11 @@
         app:layout_constraintTop_toBottomOf="@+id/tV_NumMWindows" />
 
     <EditText
-        android:id="@+id/eT_lWindows"
-        android:layout_width="75dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="104dp"
-        android:ems="10"
-        android:fontFamily="sans-serif-light"
-        android:hint="0"
-        android:inputType="number"
-        android:textAlignment="viewStart"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tV_NumLWindows"
-        app:layout_constraintTop_toBottomOf="@+id/eT_mWindows" />
-
-    <TextView
-        android:id="@+id/tV_NumMWindows"
-        android:layout_width="200dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="16dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Number of Medium Windows:"
-        android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tV_NumSWindows" />
-
-    <EditText
         android:id="@+id/eT_mWindows"
-        android:layout_width="75dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="104dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
         android:fontFamily="sans-serif-light"
         android:hint="0"
@@ -106,15 +86,14 @@
         android:textAlignment="viewStart"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tV_NumMWindows"
         app:layout_constraintTop_toBottomOf="@+id/eT_sWindows" />
 
     <TextView
         android:id="@+id/tV_NumSWindows"
-        android:layout_width="200dp"
-        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="sans-serif-medium"
         android:text="Number of Small Windows:"
         android:textAlignment="center"
@@ -122,10 +101,88 @@
         app:layout_constraintTop_toBottomOf="@+id/tV_NumFloors" />
 
     <TextView
-        android:id="@+id/tV_Phone"
-        android:layout_width="150dp"
-        android:layout_height="35dp"
+        android:id="@+id/tV_NumFloors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Number of floors:"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eT_Phone" />
+
+    <Spinner
+        android:id="@+id/s_floors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintStart_toEndOf="@+id/tV_NumFloors"
+        app:layout_constraintTop_toBottomOf="@+id/eT_Phone" />
+
+    <EditText
+        android:id="@+id/eT_Email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-light"
+        android:hint="example@email.com"
+        android:inputType="textEmailAddress"
+        android:textAlignment="viewStart"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tV_Email"
+        app:layout_constraintStart_toEndOf="@+id/tV_Name" />
+
+    <EditText
+        android:id="@+id/eT_Phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-light"
+        android:hint="+1(208)-555-1234"
+        android:inputType="phone"
+        android:textAlignment="viewStart"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tV_Phone"
+        app:layout_constraintStart_toEndOf="@+id/tV_Name" />
+
+    <EditText
+        android:id="@+id/eT_sWindows"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-light"
+        android:hint="0"
+        android:inputType="number"
+        android:textAlignment="viewStart"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/s_floors" />
+
+    <TextView
+        android:id="@+id/tV_NumMWindows"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Number of Medium Windows:"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tV_NumSWindows" />
+
+    <TextView
+        android:id="@+id/tV_Phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="sans-serif-medium"
         android:text="Phone Number:"
         android:textAlignment="center"
@@ -135,9 +192,10 @@
 
     <TextView
         android:id="@+id/tV_Email"
-        android:layout_width="150dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="sans-serif-medium"
         android:text="Email:"
         android:textAlignment="center"
@@ -147,9 +205,10 @@
 
     <TextView
         android:id="@+id/tV_Address"
-        android:layout_width="150dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="sans-serif-medium"
         android:text="Address:"
         android:textAlignment="center"
@@ -159,10 +218,10 @@
 
     <TextView
         android:id="@+id/tV_Quote"
-        android:layout_width="120dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="cursive"
         android:text="Quote"
         android:textAlignment="center"
@@ -175,11 +234,10 @@
 
     <TextView
         android:id="@+id/tV_CurrentDate"
-        android:layout_width="250dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="sans-serif-thin"
         android:text="Quote Date:"
         android:textAlignment="center"
@@ -187,16 +245,14 @@
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toEndOf="@+id/tV_Quote"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tV_Name"
-        android:layout_width="150dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="sans-serif-medium"
         android:text="Customer Name:"
         android:textAlignment="center"
@@ -210,117 +266,34 @@
         android:layout_height="wrap_content"
         app:barrierDirection="top" />
 
-    <TextView
-        android:id="@+id/tV_NumFloors"
-        android:layout_width="150dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Number of floors:"
-        android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tV_Phone" />
-
-    <Spinner
-        android:id="@+id/s_floors"
-        android:layout_width="200dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toEndOf="@+id/tV_NumFloors"
-        app:layout_constraintTop_toBottomOf="@+id/tV_Phone" />
-
     <EditText
         android:id="@+id/eT_Name"
-        android:layout_width="200dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:ems="10"
         android:fontFamily="sans-serif-light"
         android:hint="Last name, First name"
         android:inputType="textPersonName"
         android:textAlignment="viewStart"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tV_Name"
-        app:layout_constraintTop_toBottomOf="@+id/tV_Quote" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tV_Name"
+        app:layout_constraintStart_toEndOf="@+id/tV_Name" />
 
     <EditText
         android:id="@+id/eTM_Address"
-        android:layout_width="200dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
         android:ems="10"
         android:fontFamily="sans-serif-light"
         android:gravity="start|top"
         android:hint="Street, City, Postal code"
-        android:inputType="textMultiLine"
+        android:inputType="textPostalAddress"
         android:textAlignment="viewStart"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
-        app:layout_constraintStart_toEndOf="@+id/tV_Address"
-        app:layout_constraintTop_toBottomOf="@+id/eT_Name" />
-
-    <EditText
-        android:id="@+id/eT_Email"
-        android:layout_width="200dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:fontFamily="sans-serif-light"
-        android:hint="example@email.com"
-        android:inputType="textEmailAddress"
-        android:textAlignment="viewStart"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toEndOf="@+id/tV_Email"
-        app:layout_constraintTop_toBottomOf="@+id/eTM_Address" />
-
-    <EditText
-        android:id="@+id/eT_Phone"
-        android:layout_width="200dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:fontFamily="sans-serif-light"
-        android:hint="+1(208)-555-1234"
-        android:inputType="phone"
-        android:textAlignment="viewStart"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toEndOf="@+id/tV_Phone"
-        app:layout_constraintTop_toBottomOf="@+id/eT_Email" />
-
-    <EditText
-        android:id="@+id/eT_sWindows"
-        android:layout_width="75dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="104dp"
-        android:ems="10"
-        android:fontFamily="sans-serif-light"
-        android:hint="0"
-        android:inputType="number"
-        android:textAlignment="viewStart"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tV_NumSWindows"
-        app:layout_constraintTop_toBottomOf="@+id/tV_NumFloors" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tV_Address"
+        app:layout_constraintStart_toEndOf="@+id/tV_Name" />
 
     <Button
         android:id="@+id/btn_SelectDate"
@@ -330,12 +303,9 @@
         android:layout_marginTop="32dp"
         android:onClick="openCalendar"
         android:text="Select Date"
-        app:layout_constraintBottom_toTopOf="@+id/tV_Location"
-        app:layout_constraintEnd_toStartOf="@+id/btn_CalcPrice"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:textColor="#009688"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tV_totalPrice"
-        app:layout_constraintVertical_bias="0.506" />
+        app:layout_constraintTop_toBottomOf="@+id/tV_totalPrice" />
 
     <Button
         android:id="@+id/btn_CalcPrice"
@@ -344,26 +314,56 @@
         android:layout_marginTop="32dp"
         android:onClick="CalculatePrice"
         android:text="Caculate Price"
-        app:layout_constraintBottom_toTopOf="@+id/tV_Location"
+        android:textColor="#009688"
         app:layout_constraintEnd_toStartOf="@+id/btn_SaveQuote"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_SelectDate"
-        app:layout_constraintTop_toBottomOf="@+id/tV_totalPrice"
-        app:layout_constraintVertical_bias="0.506" />
+        app:layout_constraintTop_toBottomOf="@+id/tV_totalPrice" />
 
     <TextView
         android:id="@+id/tV_Location"
-        android:layout_width="0dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Loc: 15, 189"
         android:textAlignment="center"
         android:textColor="#00BCD4"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.02" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.96" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

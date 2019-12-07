@@ -29,6 +29,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC7bvCB_OYUFgv8AgQ6CtpPdb4FncFv4E4" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".SelectDate_View" />
         <activity android:name=".CreateQuote_View" />

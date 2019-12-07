@@ -40,9 +40,8 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     private EditText eT_name, eT_address, eT_email, eT_phone_number, small_windows, medium_windows, large_windows;
     private TextView quoteDate, totalPrice, aptDate, latLongLocation;
     private static String name, address, email, phone_number, m_date, a_date, a_Time, price;
-
-    private Quote quote;
     private static double quoteAmount;
+    private Quote quote;
 
     /* Variables for the small, medium, and large number of windows that change when you select a new spinner option */
     private static int bS, bM, bL, oneS, oneM, oneL, twoS, twoM, twoL, comS, comM, comL;
@@ -110,6 +109,8 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         floorsList.add(one);
         floorsList.add(two);
         floorsList.add(commercial);
+
+        quoteAmount = 0.00;
 
         fillTextFields();
 
@@ -416,6 +417,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
     /* Just abstracting the repetitive work for calculating a quote because it happens for more than one button click */
     private void initializeQuote() {
+        // TODO FIX THE FACT THAT THE MAZ INT OF WINDOWS IS 10 DIGITS
         Customer customer = new Customer(id,
                 eT_name.getText().toString(),
                 eT_address.getText().toString(),
@@ -435,7 +437,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     public void CalculatePrice(View view) {
         initializeQuote();
         quoteAmount = quote.getAmount();
-        totalPrice.setText("Total Price: $ " + quoteAmount);
+        totalPrice.setText("Total Price: $ " + String.format("%.2f",quoteAmount));
         Toast.makeText(this, "Price Calculated", Toast.LENGTH_LONG).show();
     }
 
@@ -452,7 +454,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         eT_email.setText(email);
         eT_phone_number.setText(phone_number);
         eT_address.setText(address);
-        totalPrice.setText("Total Price: $" + quoteAmount);
+        totalPrice.setText("Total Price: $ " + String.format("%.2f",quoteAmount));
     }
 
     /* Method for saving quote data to Firebase Database */
