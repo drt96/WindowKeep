@@ -18,6 +18,10 @@ public class Customer {
      Not every customer will have a phone number but if an apt is made an email is needed
     */
 
+    public Customer() {
+
+    }
+
     /* Default for create quote activity */
     public Customer(ID id) {
         this.id = id;

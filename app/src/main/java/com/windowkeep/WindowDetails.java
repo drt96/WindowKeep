@@ -9,6 +9,10 @@ public class WindowDetails {
     /* Constructor
      * Only gets made once each floor has been worked on
      * */
+
+    public WindowDetails() {
+    }
+
     public WindowDetails(List<Floors> floors) {
         this.floors = floors;
     }

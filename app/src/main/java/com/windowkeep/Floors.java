@@ -6,6 +6,9 @@ public class Floors {
     private int medium;
     private int large;
 
+    public Floors() {
+    }
+
     // Use 0 if nothing
     public Floors(int small, int medium, int large) {
         this.small = small;
