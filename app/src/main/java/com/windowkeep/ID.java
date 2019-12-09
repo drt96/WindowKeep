@@ -57,7 +57,7 @@ public class ID implements Parcelable {
     }
 
     public void setLatitude(double latitude) {
-        this.longitude = latitude;
+        this.latitude = latitude;
     }
 
     public double getLongitude() {
