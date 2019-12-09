@@ -58,6 +58,10 @@ public class Quote {
 
     /* These should be the only constructors that should be needed */
     public Quote() {
+        quoteDate = "";
+        aptTime = "";
+        aptDate = "";
+        amount = 0.0;
     }
 
     public Quote(String quoteDate, Customer customer, WindowDetails windowDetails) {

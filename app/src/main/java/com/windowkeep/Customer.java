@@ -19,7 +19,10 @@ public class Customer {
     */
 
     public Customer() {
-
+        name = "";
+        address = "";
+        phoneNumber = "";
+        email = "";
     }
 
     /* Default for create quote activity */

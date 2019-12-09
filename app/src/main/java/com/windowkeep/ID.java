@@ -13,8 +13,8 @@ public class ID implements Parcelable {
 
     /* Constructors */
     public ID() {
-        latitude = 0;
-        longitude = 0;
+        latitude = 0.0;
+        longitude = 0.0;
     }
 
     public ID(double latitude, double longitude) {
