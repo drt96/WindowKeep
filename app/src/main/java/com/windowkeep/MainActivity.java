@@ -179,6 +179,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     Quote quote = snapshot.getValue(Quote.class);
                     double lat = quote.getCustomer().getID().getLatitude();
                     double lon = quote.getCustomer().getID().getLongitude();
+                    // Latitude is getting set as zero! but Longitude is working
                     Log.i("Location", "" + lat + " " + lon);
                     LatLng latLng = new LatLng(lat, lon);
                     MarkerOptions markerOptions = new MarkerOptions();
@@ -222,8 +223,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.addMarker(markerOptions);
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 btnQuote.setEnabled(true);
-                Toast.makeText(getApplicationContext(), latLng.toString(),
-                        Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), latLng.toString(),
+//                        Toast.LENGTH_LONG).show();
 
             }
         });
@@ -233,9 +234,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public boolean onMarkerClick(final Marker marker) {
 
-        Toast.makeText(this,
-                "Latitude: " + marker.getPosition().latitude + " Longitude: " + marker.getPosition().longitude,
-                Toast.LENGTH_LONG).show();
+//        Toast.makeText(this,
+//                "Latitude: " + marker.getPosition().latitude + " Longitude: " + marker.getPosition().longitude,
+//                Toast.LENGTH_LONG).show();
 
         return false;
     }
