@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 public class AppointmentList_View extends AppCompatActivity {
 
+    /* Private Data */
     private CalendarView calendarView;
     private int dateMonth;
     private int dateDay;
@@ -61,6 +62,7 @@ public class AppointmentList_View extends AppCompatActivity {
                             }
                         }
                     }
+
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                     }
