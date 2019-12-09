@@ -52,9 +52,9 @@ public class AppointmentList_View extends AppCompatActivity {
                             Quote quote = snapshot.getValue(Quote.class);
                             if (quote.getAptDate().contentEquals(dateMonth + "/" + dateDay + "/" + dateYear)) {
                                 String aptInfo =
-                                        "Name: " + quote.getCustomer().getName() + "\n" +
+                                        "\nName: " + quote.getCustomer().getName() + "\n" +
                                         "Address: " + quote.getCustomer().getAddress() + "\n" +
-                                        "Appointment time: " + quote.getAptTime();
+                                        "Appointment time: " + quote.getAptTime() + "\n";
                                 list.add(aptInfo);
                                 listView.setAdapter(arrayAdapter);
                                 arrayAdapter.notifyDataSetChanged();
