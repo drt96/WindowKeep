@@ -73,10 +73,10 @@ public class Quote {
     public Quote(String quoteDate, String aptDate, String aptTime, Customer customer, double amount, WindowDetails windowDetails) {
         this.quoteDate = quoteDate;
         this.aptDate = aptDate;
-        this.customer = customer;
         this.aptTime = aptTime;
-        this.windowDetails = windowDetails;
+        this.customer = customer;
         this.amount = amount;
+        this.windowDetails = windowDetails;
     }
 
     /* Getters and Setters */
@@ -93,7 +93,7 @@ public class Quote {
         return aptTime;
     }
 
-    public void setAptTime(String aptDate) {
+    public void setAptTime(String aptTime) {
         this.aptTime = aptTime;
     }
 

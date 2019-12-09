@@ -50,8 +50,11 @@ public class AppointmentList_View extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Quote quote = snapshot.getValue(Quote.class);
-                            if (quote.getAptDate().equalsIgnoreCase(dateMonth + "/" + dateDay + "/" + dateYear)) {
-                                String aptInfo = "" + quote.getAptDate() + " - " + quote.getAptTime();
+                            if (quote.getAptDate().contentEquals(dateMonth + "/" + dateDay + "/" + dateYear)) {
+                                String aptInfo =
+                                        "Name: " + quote.getCustomer().getName() + "\n" +
+                                        "Address: " + quote.getCustomer().getAddress() + "\n" +
+                                        "Appointment time: " + quote.getAptTime();
                                 list.add(aptInfo);
                                 listView.setAdapter(arrayAdapter);
                                 arrayAdapter.notifyDataSetChanged();
