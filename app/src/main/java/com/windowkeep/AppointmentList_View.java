@@ -15,6 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -36,23 +37,20 @@ public class AppointmentList_View extends AppCompatActivity {
         public static Comparator<String> createAppointmentOrderComparator() {
             return Comparator.comparingInt(AppointmentList_View::parseStringToNumber);
         }
-
     }
 
     private static int parseStringToNumber(String aptTimes) {
 
         final String digitsOnly = aptTimes.replaceAll(DIGIT_AND_DECIMAL_REGEX, "");
 
-        if("".equals(digitsOnly)) return 0;
+        if ("".equals(digitsOnly)) return 0;
 
-        try{
+        try {
             return Integer.parseInt(digitsOnly);
         } catch (NumberFormatException nfe) {
             return 0;
         }
     }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +60,6 @@ public class AppointmentList_View extends AppCompatActivity {
         listView = findViewById(R.id.lv_aptDates);
         list = new ArrayList<String>();
         arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, list);
-
-
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -80,43 +76,21 @@ public class AppointmentList_View extends AppCompatActivity {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Quote quote = snapshot.getValue(Quote.class);
                             if (quote.getAptDate().contentEquals(dateMonth + "/" + dateDay + "/" + dateYear)) {
-                                List<String> aptInfo =
+
+                                List<String> aptTimeList =
                                         Arrays.asList("\nName: " + quote.getCustomer().getName() + "\n" +
                                                 "Address: " + quote.getCustomer().getAddress() + "\n" +
                                                 "Appointment time: " + quote.getAptTime() + "\n");
 
-//                                String aptInfo =
-//                                        "\nName: " + quote.getCustomer().getName() + "\n" +
-//                                                "Address: " + quote.getCustomer().getAddress() + "\n" +
-//                                                "Appointment time: " + quote.getAptTime() + "\n";
-
-//                                String[] times = aptInfo.split(":");
-//                                Integer[] timeValues = new Integer[times.length];
-//                                for (int i = 0; i < times.length; i++) {
-//                                    timeValues[i] = Integer.parseInt(times[i].trim());
-//                                }
-//
-//                                Collections.sort(Arrays.asList(timeValues));
-//
-//                                StringBuilder builder = new StringBuilder();
-//                                for (int i = 0; i < timeValues.length; i++) {
-//                                    Integer timeValue = timeValues[i];
-//                                    builder.append(timeValue);
-//                                    if (i < timeValues.length - 1) {
-//                                        builder.append(":");
-//                                    }
-//                                }
-//                                list.add(builder.toString());
-//                                listView.setAdapter(arrayAdapter);
-//                                arrayAdapter.notifyDataSetChanged();
-//                            }
-                                aptInfo.sort(AppointmentListComparator.createAppointmentOrderComparator());
-                                list.add(String.valueOf(aptInfo));
+                                aptTimeList.sort(AppointmentListComparator.createAppointmentOrderComparator());
+                                list.addAll(aptTimeList);
+//                                list.add(String.valueOf(aptTimeList));
                                 listView.setAdapter(arrayAdapter);
                                 arrayAdapter.notifyDataSetChanged();
                             }
                         }
                     }
+
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                     }
