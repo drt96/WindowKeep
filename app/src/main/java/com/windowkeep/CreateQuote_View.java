@@ -418,6 +418,9 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     /* Just abstracting the repetitive work for calculating a quote because it happens for more than one button click */
     private void initializeQuote() {
         // TODO FIX THE FACT THAT THE MAZ INT OF WINDOWS IS 10 DIGITS
+        // TODO: Need to fix window details. The number of windows for each floor are not saving to firebase.
+        //  Quote amount is therefore wrong in firebase as well.
+
         Customer customer = new Customer(id,
                 eT_name.getText().toString(),
                 eT_address.getText().toString(),
