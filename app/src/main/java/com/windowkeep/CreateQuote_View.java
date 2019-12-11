@@ -50,7 +50,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
     private ID id;
 
     /* Member data used to populate the windowDetails class for each quote */
-    private Floors basement, one, two, commercial;
+    private static Floors basement, one, two, commercial;
     private List<Floors> floorsList;
 
     public CreateQuote_View() {
@@ -77,6 +77,11 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         price = "";
         a_date = "";
         a_Time = "";
+        quoteAmount = 0.00;
+        basement = new Floors(0, 0, 0);
+        one = new Floors(0, 0, 0);
+        two = new Floors(0, 0, 0);
+        commercial = new Floors(0, 0, 0);
     }
 
     @Override
@@ -98,19 +103,12 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         saveQuote = findViewById(R.id.btn_SaveQuote);
         latLongLocation = findViewById(R.id.tV_Location);
 
-        basement = new Floors(0, 0, 0);
-        one = new Floors(0, 0, 0);
-        two = new Floors(0, 0, 0);
-        commercial = new Floors(0, 0, 0);
-
         /* DON'T FORGET ABOUT THIS */
         floorsList = new ArrayList<Floors>();
         floorsList.add(basement);
         floorsList.add(one);
         floorsList.add(two);
         floorsList.add(commercial);
-
-        quoteAmount = 0.00;
 
         fillTextFields();
 
@@ -379,6 +377,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         large_windows.setOnFocusChangeListener(largeFocusListener);
 
         setTodaysDate();
+        totalPrice.setText("Total Price: $ " + String.format("%.2f",quoteAmount));
     }
 
     @Override /* This function is an abstract function from the spinner that needs implementation */
@@ -439,6 +438,10 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
     public void CalculatePrice(View view) {
         initializeQuote();
+        if (comL == 0 && comM == 0 && comS == 0)
+            quote.calculateAmount(false);
+        else
+            quote.calculateAmount(true);
         quoteAmount = quote.getAmount();
         totalPrice.setText("Total Price: $ " + String.format("%.2f",quoteAmount));
         Toast.makeText(this, "Price Calculated", Toast.LENGTH_LONG).show();

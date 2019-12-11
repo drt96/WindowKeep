@@ -223,8 +223,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.addMarker(markerOptions);
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 btnQuote.setEnabled(true);
-//                Toast.makeText(getApplicationContext(), latLng.toString(),
-//                        Toast.LENGTH_LONG).show();
+                // Toast.makeText(getApplicationContext(), "" + latLng.toString(), Toast.LENGTH_LONG).show();
 
             }
         });
