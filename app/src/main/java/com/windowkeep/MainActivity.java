@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.location.Location;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -244,9 +245,39 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 btnQuote.setEnabled(true);
                 // Toast.makeText(getApplicationContext(), "" + latLng.toString(), Toast.LENGTH_LONG).show();
-
             }
         });
+
+        Intent incomingIntent = getIntent();
+        Bundle extras = incomingIntent.getExtras();
+
+        new CountDownTimer(100, 1000) {
+            public void onFinish() {
+                if (extras != null) {
+                    if (extras.containsKey("lat")) {
+                        double latitude = extras.getDouble("lat");
+                        double longitude = extras.getDouble("long");
+                        LatLng id = new LatLng(latitude, longitude);
+
+                        // TODO WHY DOES CALLING THIS FUNCTION NOT MOVE THE CAMERA??
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(id, 17));
+
+                        Log.i("pants", "Camera got moved" + " " + id);
+                    } else {
+                    }
+                }
+                else
+                {
+                    Log.i("INFO","extras is NULL");
+                }
+            }
+
+            public void onTick(long millisUntilFinished) {
+                // millisUntilFinished    The amount of time until finished.
+            }
+        }.start();
+
+
     }
 
 

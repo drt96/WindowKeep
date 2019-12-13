@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,6 +35,7 @@ public class AppointmentList_View extends AppCompatActivity {
     private ArrayList<String> list;
     private ArrayAdapter<String> arrayAdapter;
     private static final String DIGIT_AND_DECIMAL_REGEX = "[^\\d.]";
+    private ID selectedItemID;
 
     public static final class AppointmentListComparator {
         public static Comparator<String> createAppointmentOrderComparator() {
@@ -62,6 +64,7 @@ public class AppointmentList_View extends AppCompatActivity {
         listView = findViewById(R.id.lv_aptDates);
         list = new ArrayList<String>();
         arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, list);
+        selectedItemID = new ID();
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -84,6 +87,8 @@ public class AppointmentList_View extends AppCompatActivity {
                                                 "Address: " + quote.getCustomer().getAddress() + "\n" +
                                                 "Appointment time: " + quote.getAptTime() + "\n");
 
+
+
                                 aptTimeList.sort(AppointmentListComparator.createAppointmentOrderComparator());
                                 list.addAll(aptTimeList);
 //                                list.add(String.valueOf(aptTimeList));
@@ -97,19 +102,48 @@ public class AppointmentList_View extends AppCompatActivity {
                     public void onCancelled(DatabaseError databaseError) {
                     }
                 });
-                /* When an item is clicked we will get the options to A) see it on the Map B) delete it or C) export it for the client */
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            }
+        });
+
+
+        /* When an item is clicked we will get the options to A) see it on the Map B) delete it or C) export it for the client */
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String selectedItemString = (listView.getItemAtPosition(position).toString());
+                arrayAdapter.notifyDataSetChanged();
+
+                FirebaseDatabase.getInstance().getReference().child("Quote Data").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Quote quote = snapshot.getValue(Quote.class);
+                            if (("\nName: " + quote.getCustomer().getName() + "\n" +
+                                    "Address: " + quote.getCustomer().getAddress() + "\n" +
+                                    "Appointment time: " + quote.getAptTime() + "\n").equalsIgnoreCase(selectedItemString)) {
+                                selectedItemID = new ID(quote.getCustomer().getID().getLatitude(), quote.getCustomer().getID().getLongitude());
 
-                        // David delete
-                        // Tanner go to map (probably)
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
-                        // Daniel export to Calender
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                Bundle extras = new Bundle();
+                                extras.putDouble("lat", selectedItemID.getLatitude());
+                                extras.putDouble("long", selectedItemID.getLongitude());
+                                intent.putExtras(extras);
+                                startActivity(intent);
+                            }
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
                     }
                 });
+
+
+                // Passing the lat and long to the map activity so it can zoom in on the clicked appointment's pin
+
+                // Daniel export to Calender
+
             }
         });
     }
