@@ -3,7 +3,10 @@ package com.windowkeep;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.ListView;
@@ -32,8 +35,6 @@ public class AppointmentList_View extends AppCompatActivity {
     private static final String DIGIT_AND_DECIMAL_REGEX = "[^\\d.]";
 
     public static final class AppointmentListComparator {
-
-
         public static Comparator<String> createAppointmentOrderComparator() {
             return Comparator.comparingInt(AppointmentList_View::parseStringToNumber);
         }
@@ -93,6 +94,13 @@ public class AppointmentList_View extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                     }
                 });
             }
