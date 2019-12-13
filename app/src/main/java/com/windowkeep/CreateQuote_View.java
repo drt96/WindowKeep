@@ -377,7 +377,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         large_windows.setOnFocusChangeListener(largeFocusListener);
 
         setTodaysDate();
-        totalPrice.setText("Total Price: $ " + String.format("%.2f",quoteAmount));
+        totalPrice.setText("Total Price: $ " + String.format("%.2f", quoteAmount));
     }
 
     @Override /* This function is an abstract function from the spinner that needs implementation */
@@ -416,9 +416,7 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
 
     /* Just abstracting the repetitive work for calculating a quote because it happens for more than one button click */
     private void initializeQuote() {
-        // TODO FIX THE FACT THAT THE MAZ INT OF WINDOWS IS 10 DIGITS
-        // TODO: Need to fix window details. The number of windows for each floor are not saving to firebase.
-        //  Quote amount is therefore wrong in firebase as well.
+        // TODO FIX THE FACT THAT THE MAX INT OF WINDOWS IS 10 DIGITS
 
         Customer customer = new Customer(id,
                 eT_name.getText().toString(),
@@ -426,27 +424,26 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
                 eT_phone_number.getText().toString(),
                 eT_email.getText().toString());
         WindowDetails windowDetails = new WindowDetails(floorsList);
+
         if (!a_date.isEmpty()) {
             quote = new Quote(m_date, a_date, a_Time, customer, quoteAmount, windowDetails);
         } else {
-            quote = new Quote(m_date, customer, windowDetails);
+            quote = new Quote(m_date, customer, quoteAmount, windowDetails);
         }
 
         boolean isCommercial = floorsSpinner.getSelectedItem().toString().equalsIgnoreCase("Commercial");
         quote.calculateAmount(isCommercial);
+        quoteAmount = quote.getAmount();
     }
 
+    /* Updates the view */
     public void CalculatePrice(View view) {
         initializeQuote();
-        if (comL == 0 && comM == 0 && comS == 0)
-            quote.calculateAmount(false);
-        else
-            quote.calculateAmount(true);
-        quoteAmount = quote.getAmount();
-        totalPrice.setText("Total Price: $ " + String.format("%.2f",quoteAmount));
+        totalPrice.setText("Total Price: $ " + String.format("%.2f", quoteAmount));
         Toast.makeText(this, "Price Calculated", Toast.LENGTH_LONG).show();
     }
 
+    /* Displays current date and time */
     public void setTodaysDate() {
         java.util.Date date = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy '-' HH:mm z");
@@ -455,25 +452,18 @@ public class CreateQuote_View extends AppCompatActivity implements AdapterView.O
         quoteDate.setText("Quote Date: " + formattedDate);
     }
 
+    /* Updates text fields */
     public void fillTextFields() {
         eT_name.setText(name);
         eT_email.setText(email);
         eT_phone_number.setText(phone_number);
         eT_address.setText(address);
-        totalPrice.setText("Total Price: $ " + String.format("%.2f",quoteAmount));
+        totalPrice.setText("Total Price: $ " + String.format("%.2f", quoteAmount));
     }
 
     /* Method for saving quote data to Firebase Database */
     private void saveToFB() {
-        /* SORRY I (DANIEL) CHANGED IT A BIT
-         Create the new customer passing in values from activity.
-         We don't need getText and toString for location because
-         we're passing the Location class to the Customer class
-         via Parcelable
-        */
         initializeQuote();
-
-        // TODO LOOK AT WISHLIST FOR FIREBASE AWESOMENESS
 
         /* Initialize the database reference based off of the Firebase variable above */
         DatabaseReference myReference = database.getReference();

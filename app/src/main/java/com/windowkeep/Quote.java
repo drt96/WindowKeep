@@ -64,10 +64,11 @@ public class Quote {
         amount = 0.0;
     }
 
-    public Quote(String quoteDate, Customer customer, WindowDetails windowDetails) {
+    public Quote(String quoteDate, Customer customer, double amount, WindowDetails windowDetails) {
         this.quoteDate = quoteDate;
         this.customer = customer;
         this.windowDetails = windowDetails;
+        this.amount = amount;
     }
 
     public Quote(String quoteDate, String aptDate, String aptTime, Customer customer, double amount, WindowDetails windowDetails) {
