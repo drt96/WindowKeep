@@ -31,10 +31,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class MainActivity extends FragmentActivity implements OnMapReadyCallback {
 
 
     private GoogleMap mMap;
@@ -183,7 +185,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     Log.i("Location", "" + lat + " " + lon);
                     LatLng latLng = new LatLng(lat, lon);
                     MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.title(" Name: " + quote.getCustomer().getName() + " Address:" + quote.getCustomer().getAddress());
+                    markerOptions.title(" Name: " + quote.getCustomer().getName() + " Address: " + quote.getCustomer().getAddress());
                     markerOptions.position(latLng);
                     mMap.addMarker(markerOptions);
                 }
@@ -195,13 +197,31 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-        /* Set a listener for marker click. */
-        mMap.setOnMarkerClickListener(this);
-
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+
             @Override
             public void onInfoWindowClick(Marker marker) {
+                FirebaseDatabase.getInstance().getReference().child("Quote Data").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Quote quote = snapshot.getValue(Quote.class);
+                            double lat = quote.getCustomer().getID().getLatitude();
+                            double lon = quote.getCustomer().getID().getLongitude();
+                            LatLng latLng = new LatLng(lat, lon);
+                            if (marker.getPosition() == latLng) {
+                                snapshot.getRef().setValue(null);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
                 marker.remove();
+
             }
         });
 
@@ -229,16 +249,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
-    /* Called when the user clicks a marker. */
-    @Override
-    public boolean onMarkerClick(final Marker marker) {
-
-//        Toast.makeText(this,
-//                "Latitude: " + marker.getPosition().latitude + " Longitude: " + marker.getPosition().longitude,
-//                Toast.LENGTH_LONG).show();
-
-        return false;
-    }
 
     /* Activity for quote view */
     public void openQuoteView(View view) {
