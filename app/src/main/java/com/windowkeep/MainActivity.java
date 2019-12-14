@@ -202,16 +202,22 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public void onInfoWindowClick(Marker marker) {
-                FirebaseDatabase.getInstance().getReference().child("Quote Data").addListenerForSingleValueEvent(new ValueEventListener() {
+                DatabaseReference fb = FirebaseDatabase.getInstance().getReference().child("Quote Data");
+                        fb.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Quote quote = snapshot.getValue(Quote.class);
+                            String Id = snapshot.getKey();
+                            Log.i("FB","Id = " + Id);
                             double lat = quote.getCustomer().getID().getLatitude();
                             double lon = quote.getCustomer().getID().getLongitude();
                             LatLng latLng = new LatLng(lat, lon);
-                            if (marker.getPosition() == latLng) {
-                                snapshot.getRef().setValue(null);
+                            Log.i("Location", "Location: " + latLng);
+                            Log.i("Marker", "Marker: " + marker.getPosition());
+                            if (marker.getPosition().latitude == latLng.latitude && marker.getPosition().longitude == latLng.longitude) {
+                                fb.child(Id).removeValue();
+                                Log.i("Delete", "marker deleted");
                             }
                         }
                     }
@@ -222,7 +228,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 });
                 marker.remove();
-
             }
         });
 
@@ -251,7 +256,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         Intent incomingIntent = getIntent();
         Bundle extras = incomingIntent.getExtras();
 
-        new CountDownTimer(100, 1000) {
+        new CountDownTimer(500, 1000) {
             public void onFinish() {
                 if (extras != null) {
                     if (extras.containsKey("lat")) {
@@ -279,6 +284,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     }
+
+
 
 
     /* Activity for quote view */
