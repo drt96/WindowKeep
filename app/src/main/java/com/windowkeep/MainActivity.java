@@ -6,7 +6,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -37,7 +36,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback {
 
-
     private GoogleMap mMap;
     private Boolean mLocationPermissionsGranted = false;
     private FusedLocationProviderClient mFusedLocationProviderClient;
@@ -48,7 +46,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 18f;
     private Button btnQuote;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +101,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         Zoom buttons- causes app to crash ?
         mMap.getUiSettings().setZoomControlsEnabled(true);
         */
-
     }
 
     private void getLocationPermission() {
@@ -147,7 +143,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                     Log.d(TAG, "onRequestPermissionsResult: permission granted");
                     mLocationPermissionsGranted = true;
-                    //initialize our map
+                    // Initialize our map
                     initMap();
                 }
             }
@@ -191,7 +187,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 
@@ -200,21 +195,23 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onInfoWindowClick(Marker marker) {
                 DatabaseReference fb = FirebaseDatabase.getInstance().getReference().child("Quote Data");
-                        fb.addListenerForSingleValueEvent(new ValueEventListener() {
+                fb.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Quote quote = snapshot.getValue(Quote.class);
-                            //Get the name of the child from the database so that we can call that specific child later to delete.
+                            /* Get the name of the child from the database so that we can call that specific child later to delete. */
                             String Id = snapshot.getKey();
 
-                            //marker.getPosition is at LatLng so we need to make a new LatLng
+                            /* marker.getPosition is at LatLng so we need to make a new LatLng */
                             double lat = quote.getCustomer().getID().getLatitude();
                             double lon = quote.getCustomer().getID().getLongitude();
                             LatLng latLng = new LatLng(lat, lon);
 
-                            //Checks the position of the marker and compares it to all the lats and longs in the database
-                            //If they match then it will be deleted.
+                            /*
+                            Checks the position of the marker and compares it to all the lats and longs in the database
+                            If they match then it will be deleted.
+                            */
                             if (marker.getPosition().latitude == latLng.latitude && marker.getPosition().longitude == latLng.longitude) {
                                 fb.child(Id).removeValue();
                             }
@@ -226,7 +223,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                         //needed for onDataChange
                     }
                 });
-                //Removes the marker from the map
+                /* Removes the marker from the map */
                 marker.remove();
             }
         });
@@ -241,7 +238,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                  * longitude values
                  */
 
-
                 id = new ID(latLng.latitude, latLng.longitude);
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.title("Location: " + latLng.latitude + ":" + latLng.longitude);
@@ -249,7 +245,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.addMarker(markerOptions);
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 btnQuote.setEnabled(true);
-                // Toast.makeText(getApplicationContext(), "" + latLng.toString(), Toast.LENGTH_LONG).show();
+                /* Toast.makeText(getApplicationContext(), "" + latLng.toString(), Toast.LENGTH_LONG).show(); */
             }
         });
 
@@ -270,10 +266,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                         Log.i("pants", "Camera got moved" + " " + id);
                     } else {
                     }
-                }
-                else
-                {
-                    Log.i("INFO","extras is NULL");
+                } else {
+                    Log.i("INFO", "extras is NULL");
                 }
             }
 
@@ -281,12 +275,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 // millisUntilFinished    The amount of time until finished.
             }
         }.start();
-
-
     }
-
-
-
 
     /* Activity for quote view */
     public void openQuoteView(View view) {

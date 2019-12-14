@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,7 +14,6 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 
@@ -53,32 +51,32 @@ public class SelectDate_View extends AppCompatActivity implements AdapterView.On
                 int monthNum = 0;
                 int yearNum = 0;
 
-                // Convert all the string values to integers with these try statements
+                /* Convert all the string values to integers with these try statements */
                 try {
                     dayNum = Integer.parseInt(dayString);
-                } catch(NumberFormatException nfe) {
+                } catch (NumberFormatException nfe) {
                 }
 
                 try {
                     yearNum = Integer.parseInt(yearString);
-                } catch(NumberFormatException nfe) {
+                } catch (NumberFormatException nfe) {
                 }
 
                 try {
                     monthNum = Integer.parseInt(monthString);
-                } catch(NumberFormatException nfe) {
+                } catch (NumberFormatException nfe) {
                 }
 
-
-                // THIS LOGIC IS FOR WHEN IT DOES NOT WORK
-                // current date = 12/9/2019      selected date = 11/14/2019
-                if      (yearNum > year || (monthNum > (month + 1) && yearNum == year) ||
+                /*
+                 THIS LOGIC IS FOR WHEN IT DOES NOT WORK
+                 current date = 12/9/2019      selected date = 11/14/2019
+                */
+                if (yearNum > year || (monthNum > (month + 1) && yearNum == year) ||
                         (monthNum == month + 1 && yearNum == year && dayNum > day)) {
                     t_selectedDate.setText("Invalid Date");
                     confirmButton.setEnabled(false);
                     confirmButton.setVisibility(View.INVISIBLE);
-                }
-                else {
+                } else {
                     dateMonth = month + 1;
                     dateDay = day;
                     dateYear = year;
@@ -86,8 +84,6 @@ public class SelectDate_View extends AppCompatActivity implements AdapterView.On
                     confirmButton.setEnabled(true);
                     confirmButton.setVisibility(View.VISIBLE);
                 }
-
-
             }
         });
 

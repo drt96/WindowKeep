@@ -42,4 +42,3 @@ public class Appointment {
                 + "\n" + "Location: " + quote.getCustomer().getID().toString();
     }
 }
-

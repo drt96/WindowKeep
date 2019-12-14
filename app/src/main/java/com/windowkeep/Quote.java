@@ -162,7 +162,6 @@ public class Quote {
         amount = calcAmount;
     }
 
-
     @Override
     public String toString() {
         return "Quote:" +
