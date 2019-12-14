@@ -29,12 +29,10 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -48,8 +46,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private static final float DEFAULT_ZOOM = 1f;
-    private Button btnQuote, btnAppointments;
+    private static final float DEFAULT_ZOOM = 18f;
+    private Button btnQuote;
 
 
     @Override
@@ -182,9 +180,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     Quote quote = snapshot.getValue(Quote.class);
                     double lat = quote.getCustomer().getID().getLatitude();
                     double lon = quote.getCustomer().getID().getLongitude();
-                    // Latitude is getting set as zero! but Longitude is working
-                    Log.i("Location", "" + lat + " " + lon);
                     LatLng latLng = new LatLng(lat, lon);
+                    //Setting up the information for the marker and then adding it to the map
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.title(" Name: " + quote.getCustomer().getName() + " Address: " + quote.getCustomer().getAddress());
                     markerOptions.position(latLng);
@@ -208,25 +205,28 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Quote quote = snapshot.getValue(Quote.class);
+                            //Get the name of the child from the database so that we can call that specific child later to delete.
                             String Id = snapshot.getKey();
-                            Log.i("FB","Id = " + Id);
+
+                            //marker.getPosition is at LatLng so we need to make a new LatLng
                             double lat = quote.getCustomer().getID().getLatitude();
                             double lon = quote.getCustomer().getID().getLongitude();
                             LatLng latLng = new LatLng(lat, lon);
-                            Log.i("Location", "Location: " + latLng);
-                            Log.i("Marker", "Marker: " + marker.getPosition());
+
+                            //Checks the position of the marker and compares it to all the lats and longs in the database
+                            //If they match then it will be deleted.
                             if (marker.getPosition().latitude == latLng.latitude && marker.getPosition().longitude == latLng.longitude) {
                                 fb.child(Id).removeValue();
-                                Log.i("Delete", "marker deleted");
                             }
                         }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                        //needed for onDataChange
                     }
                 });
+                //Removes the marker from the map
                 marker.remove();
             }
         });
